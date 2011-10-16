@@ -10,7 +10,7 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTasDe
 
 	public CTasDeCartesColorees(String nom, int couleur, Usine usine) {
 		super(nom, couleur, usine);
-		pTasDeCartesColorees_ = new PTasDeCartesColorees();
+		pTasDeCartesColorees_ = new PTasDeCartesColorees(this);
 	}
 
 	@Override

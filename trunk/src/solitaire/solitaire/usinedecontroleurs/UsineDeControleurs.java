@@ -1,5 +1,6 @@
 package solitaire.usinedecontroleurs;
 
+import solitaire.application.Carte;
 import solitaire.application.Tas;
 import solitaire.application.Usine;
 import solitaire.carte.CCarte;
@@ -19,7 +20,11 @@ public class UsineDeControleurs extends Usine {
 	}
 
 	public CCarte newCarte() {
-		return new CCarte(super.newCarte(1, 1));
+		return new CCarte(super.newCarte(10, 1));
+	}
+	
+	public CCarte newCarte(Carte carte) {
+		return new CCarte(carte);
 	}
 	
 	public CColonne newColonne(String nom) {

@@ -10,7 +10,7 @@ public class CTasDeCartesAlternees extends TasDeCartesAlternees implements ICTas
 
 	public CTasDeCartesAlternees(String nom, Usine usine) {
 		super(nom, usine);
-		pTasDeCartesAlternees_ = new PTasDeCartesAlternees();
+		pTasDeCartesAlternees_ = new PTasDeCartesAlternees(this);
 	}
 
 	@Override

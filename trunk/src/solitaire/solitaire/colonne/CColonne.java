@@ -10,7 +10,7 @@ public class CColonne extends Colonne implements ICColonne {
 
 	public CColonne(String nom, Usine usine) {
 		super(nom, usine);
-		pColonne_ = new PColonne();
+		pColonne_ = new PColonne(this);
 	}
 	
 	@Override

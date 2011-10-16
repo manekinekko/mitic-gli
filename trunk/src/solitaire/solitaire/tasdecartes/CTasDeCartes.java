@@ -7,10 +7,11 @@ import solitaire.application.TasDeCartes;
 import solitaire.application.Usine;
 import solitaire.carte.CCarte;
 import solitaire.pac.Presentation;
+import solitaire.usinedecontroleurs.UsineDeControleurs;
 
 public class CTasDeCartes extends TasDeCartes implements ICTasDeCartes{
 
-	private Presentation pTasDeCartes_;
+	private IPTasDeCartes pTasDeCartes_;
 	private List<CCarte> listeCartes_;
 
 	public CTasDeCartes(String nom, Usine usine) {
@@ -23,11 +24,22 @@ public class CTasDeCartes extends TasDeCartes implements ICTasDeCartes{
 		return pTasDeCartes_;
 	}
 
-	public void empiler(Carte carte){
-		
+	public CCarte getCCarte(int number){
+		try {
+			return (new UsineDeControleurs()).newCarte(super.getCarte(number));
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	
-	// TODO faire la methode pour récupérer la ccarte
-	//private get
+	public void empiler(Carte carte){
+		
+		if(super.isEmpilable(carte)){
+			super.empiler(carte);
+			pTasDeCartes_.add((new UsineDeControleurs()).newCarte(carte));
+		}
+				
+		
+	}
 	
 }

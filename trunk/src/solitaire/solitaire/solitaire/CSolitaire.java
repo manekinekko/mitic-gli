@@ -10,7 +10,7 @@ public class CSolitaire extends Solitaire implements ICSolitaire {
 
 	public CSolitaire(String nom, Usine usine) {
 		super(nom, usine);
-		pSolitaire_ = new PSolitaire();
+		pSolitaire_ = new PSolitaire(this);
 	}
 	
 	@Override

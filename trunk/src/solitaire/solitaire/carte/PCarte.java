@@ -62,7 +62,7 @@ public class PCarte extends JPanel implements IPCarte {
 		dos.setVisible(!faceVisible);
 	}
 
-	public final CCarte getControle () {
+	public final CCarte getControleur() {
 		return (controle) ;
 	}
 
