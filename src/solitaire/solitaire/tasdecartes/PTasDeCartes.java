@@ -1,28 +1,49 @@
 package solitaire.tasdecartes;
 
-import java.awt.Graphics;
+import java.awt.Container;
+import java.awt.Dimension;
 
+import javax.swing.Box;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.RepaintManager;
 
+import solitaire.carte.ICCarte;
 import solitaire.pac.Controleur;
 
-public class PTasDeCartes extends JPanel implements IPTasDeCartes{
+public class PTasDeCartes extends JLayeredPane implements IPTasDeCartes{
 
-	private CTasDeCartes controleur_;
+	private ICTasDeCartes controleur_;
 
 	public PTasDeCartes(ICTasDeCartes controleur) {
+		setLayout(null);
+		setPreferredSize(new Dimension(80, 500));
+		
 		controleur_ = controleur;
 	}
 
-	public void paint(Graphics g){
-		super.paint(g);
+//	public void paint(Graphics g){
+//		super.paint(g);
+//		
+//		for (int i = 0; i < controleur_.getNombre(); i++) {
+//			add((JPanel)(controleur_.getCCarte(i).getPresentation()));
+//		}
+//		
+//	}
+
+	@Override
+	public void add(ICCarte carte) {
 		
-		for (int i = 0; i < controleur_.getNombre(); i++) {
-			//add(controleur_.getCarte(i));
-			// TODO ajouter la ccarte récupérer du controleur.
-		}
+		JPanel pCarte = (JPanel)carte.getPresentation();
+		pCarte.setLocation(0, (controleur_.getNombre()-1)*20);
+		add(pCarte, new Integer(controleur_.getNombre()), 0);
+		System.out.println(controleur_.getNombre());
 		
+		repaint();
+	}
+
+	@Override
+	public Controleur getControleur() {
+		return controleur_;
 	}
 	
 }

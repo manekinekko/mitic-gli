@@ -18,4 +18,10 @@ public class CCarte extends Carte implements ICCarte{
 		return pCarte_;
 	}
 
+	public void setFaceVisible(boolean faceVisible) {
+		super.setFaceVisible(faceVisible);
+		pCarte_.setFaceVisible(faceVisible);
+	}
+	
 }
+

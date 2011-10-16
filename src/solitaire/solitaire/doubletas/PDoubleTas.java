@@ -10,7 +10,11 @@ public class PDoubleTas extends JPanel implements IPDoubleTas{
 
 	public PDoubleTas(Controleur controleur){
 		controleur_ = controleur;
-		controleur_.
+	}
+
+	@Override
+	public Controleur getControleur() {
+		return controleur_;
 	}
 	
 }
