@@ -1,4 +1,4 @@
-
+package solitaire;
 
 import solitaire.solitaire.CSolitaire;
 import solitaire.usinedecontroleurs.UsineDeControleurs;
