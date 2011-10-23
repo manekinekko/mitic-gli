@@ -5,6 +5,7 @@ import solitaire.application.TasDeCartesAlternees;
 import solitaire.application.Usine;
 import solitaire.carte.ICCarte;
 import solitaire.pac.Presentation;
+import solitaire.tasdecartes.ICTasDeCartes;
 
 public class CTasDeCartesAlternees extends TasDeCartesAlternees implements ICTasDeCartesAlternees{
 
@@ -12,7 +13,7 @@ public class CTasDeCartesAlternees extends TasDeCartesAlternees implements ICTas
 	
 	public CTasDeCartesAlternees(String nom, Usine usine) {
 		super(nom, usine);
-		pTasDeCartesAlternees_ = new PTasDeCartesAlternees(this);
+		pTasDeCartesAlternees_ = new PTasDeCartesAlternees((ICTasDeCartes)this);
 	}
 
 	public Presentation getPresentation() {
@@ -21,7 +22,6 @@ public class CTasDeCartesAlternees extends TasDeCartesAlternees implements ICTas
 	
 	@Override
 	public void empiler(Carte carte){
-		
 		if(super.isEmpilable(carte)){
 			super.empiler(carte);
 			pTasDeCartesAlternees_.add((ICCarte)carte);
@@ -29,7 +29,6 @@ public class CTasDeCartesAlternees extends TasDeCartesAlternees implements ICTas
 		else{
 			System.out.println("Ne peux pas empiler :)");
 		}
-		
 	}
 	
 }

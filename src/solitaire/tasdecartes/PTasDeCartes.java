@@ -14,14 +14,12 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes{
 
 	public PTasDeCartes(ICTasDeCartes controleur) {
 		setLayout(null);
-		setPreferredSize(new Dimension(80, 500));
-		
+		setPreferredSize(new Dimension(77, 456));
 		controleur_ = controleur;
 	}
 
 	@Override
 	public void add(ICCarte carte) {
-		
 		JPanel pCarte = (JPanel)carte.getPresentation();
 		pCarte.setLocation(0, (controleur_.getNombre()-1)*20);
 		add(pCarte);
