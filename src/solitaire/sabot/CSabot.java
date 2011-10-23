@@ -11,7 +11,6 @@ public class CSabot extends Sabot implements ICSabot {
 
 	public CSabot(String nom, Usine usine) {
 		super(nom, usine);
-		
 		pSabot_ = new PSabot(this, (ICTasDeCartes) cachees, (ICTasDeCartes) visibles);
 	}
 
