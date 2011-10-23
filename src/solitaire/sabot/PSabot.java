@@ -10,8 +10,9 @@ public class PSabot extends PDoubleTas implements IPSabot {
 	private ICSabot controleur_;
 
 	public PSabot(ICSabot controleur, ICTasDeCartes cTasCache, ICTasDeCartes cTasVisible) {
-		super(cTasCache, cTasVisible);
+		super(controleur, cTasCache, cTasVisible);
 		controleur_ = controleur;
+		
 	}
 
 	@Override

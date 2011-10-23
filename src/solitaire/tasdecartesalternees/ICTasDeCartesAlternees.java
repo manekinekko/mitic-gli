@@ -1,8 +1,8 @@
 package solitaire.tasdecartesalternees;
 
-import solitaire.pac.Controleur;
+import solitaire.tasdecartes.ICTasDeCartes;
 
-public interface ICTasDeCartesAlternees extends Controleur{
+public interface ICTasDeCartesAlternees extends ICTasDeCartes{
 	
 	public int getNombre();
 	

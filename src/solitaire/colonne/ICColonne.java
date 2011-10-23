@@ -1,7 +1,7 @@
 package solitaire.colonne;
 
-import solitaire.pac.Controleur;
+import solitaire.doubletas.ICDoubleTas;
 
-public interface ICColonne extends Controleur{
+public interface ICColonne extends ICDoubleTas{
 
 }
