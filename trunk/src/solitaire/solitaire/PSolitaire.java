@@ -48,13 +48,13 @@ public class PSolitaire extends JFrame implements IPSolitaire{
 		tas1.empiler(carte1);
 		tas1.empiler(carte2);
 		
-		tas2.empiler(carte3);
-		tas2.empiler(carte4);
-		tas2.empiler(carte5);
-		tas2.empiler(carte6);
+//		tas2.empiler(carte3);
+//		tas2.empiler(carte4);
+//		tas2.empiler(carte5);
+//		tas2.empiler(carte6);
 		
 		add(ptas1);
-		add(ptas2);
+//		add(ptas2);
 		pack();
 		setVisible(true);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

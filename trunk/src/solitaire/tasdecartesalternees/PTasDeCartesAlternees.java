@@ -1,15 +1,16 @@
 package solitaire.tasdecartesalternees;
 
-import javax.swing.JPanel;
-import solitaire.carte.ICCarte;
 import solitaire.pac.Controleur;
+import solitaire.tasdecartes.ICTasDeCartes;
+import solitaire.tasdecartes.PTasDeCartes;
 
-public class PTasDeCartesAlternees extends JPanel implements IPTasDeCartesAlternees{
+public class PTasDeCartesAlternees extends PTasDeCartes implements IPTasDeCartesAlternees{
 
 	private static final long serialVersionUID = 1L;
-	private ICTasDeCartesAlternees controleur_;
+	private ICTasDeCartes controleur_;
 	
-	public PTasDeCartesAlternees(ICTasDeCartesAlternees controleur) {
+	public PTasDeCartesAlternees(ICTasDeCartes controleur) {
+		super(controleur);
 		controleur_ = controleur;
 	}
 	
@@ -17,13 +18,4 @@ public class PTasDeCartesAlternees extends JPanel implements IPTasDeCartesAltern
 		return controleur_;
 	}
 
-	public void add(ICCarte carte) {
-		JPanel pCarte = (JPanel)carte.getPresentation();
-		pCarte.setLocation(0, (controleur_.getNombre()-1)*20);
-		add(pCarte);
-		setComponentZOrder(pCarte, 0);
-		repaint();
-	}
-
-	
 }
