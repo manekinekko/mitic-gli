@@ -11,7 +11,7 @@ public class CDoubleTas extends DoubleTas implements ICDoubleTas{
 
 	public CDoubleTas(Tas cache, Tas visible) {
 		super(cache, visible);
-		pDoubleTas_ = new PDoubleTas((ICTasDeCartes)cache, (ICTasDeCartes)visible);
+		pDoubleTas_ = new PDoubleTas(this, (ICTasDeCartes)cache, (ICTasDeCartes)visible);
 	}
 
 	@Override

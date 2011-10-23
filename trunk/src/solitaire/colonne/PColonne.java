@@ -7,10 +7,10 @@ import solitaire.tasdecartes.ICTasDeCartes;
 public class PColonne extends PDoubleTas implements IPColonne{
 	
 	private static final long serialVersionUID = 1L;
-	private Controleur controleur_;
+	private ICColonne controleur_;
 
-	public PColonne(Controleur controleur, ICTasDeCartes cachees, ICTasDeCartes visible) {
-		super(cachees, visible);
+	public PColonne(ICColonne controleur, ICTasDeCartes cachees, ICTasDeCartes visible) {
+		super(controleur, cachees, visible);
 		controleur_ = controleur;
 	}
 	

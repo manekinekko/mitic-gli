@@ -5,11 +5,11 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
- * Composant Présentation d'une carte
+ * Composant Presentation d'une carte
  */
 public class PCarte extends JPanel implements IPCarte {
 
-	protected CCarte controle ; // contrôleur associé
+	protected CCarte controle ; // controleur associe
 	protected JLabel face, dos;
 	protected ImageIcon icone; // image de la face
 	protected static ImageIcon iconeDos; // image du dos
@@ -54,7 +54,7 @@ public class PCarte extends JPanel implements IPCarte {
 	} // constructeur
 
 	/**
-	 * changer la visibilité de la carte
+	 * changer la visibilite de la carte
 	 * @param faceVisible: vrai si la face est visible, faux sinon
 	 */
 	public void setFaceVisible(boolean faceVisible) {

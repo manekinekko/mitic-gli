@@ -1,7 +1,7 @@
 package solitaire.sabot;
 
-import solitaire.pac.Controleur;
+import solitaire.doubletas.ICDoubleTas;
 
-public interface ICSabot extends Controleur{
+public interface ICSabot extends ICDoubleTas{
 
 }
