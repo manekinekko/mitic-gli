@@ -1,23 +1,19 @@
 package solitaire.sabot;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import solitaire.carte.PCarte;
 import solitaire.doubletas.PDoubleTas;
-import solitaire.pac.Controleur;
 import solitaire.tasdecartes.ICTasDeCartes;
 
 public class PSabot extends PDoubleTas implements IPSabot {
 
 	private static final long serialVersionUID = 1L;
-	private ICSabot controleur_;
 
 	public PSabot(ICSabot controleur, ICTasDeCartes cTasCache, ICTasDeCartes cTasVisible) {
 		super(controleur, cTasCache, cTasVisible);
-		controleur_ = controleur;
-		
-	}
-
-	@Override
-	public Controleur getControleur() {
-		return controleur_;
+		setPreferredSize(new Dimension(PCarte.largeur*3,PCarte.hauteur));
+		setBackground(Color.red);
 	}
 
 }

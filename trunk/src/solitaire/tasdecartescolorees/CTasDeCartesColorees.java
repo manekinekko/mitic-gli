@@ -30,5 +30,10 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTasDe
 			System.out.println("Ne peux pas empiler :)");
 		}
 	}
+
+	@Override
+	public ICCarte getCCarte(int number) {
+		return null;
+	}
 	
 }

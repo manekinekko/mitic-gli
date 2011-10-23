@@ -1,7 +1,7 @@
 package solitaire.tasdecartescolorees;
 
-import solitaire.pac.Controleur;
+import solitaire.tasdecartes.ICTasDeCartes;
 
-public interface ICTasDeCartesColorees extends Controleur{
+public interface ICTasDeCartesColorees extends ICTasDeCartes{
 
 }
