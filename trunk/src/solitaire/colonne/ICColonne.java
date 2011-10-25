@@ -5,4 +5,6 @@ import solitaire.pac.Controleur;
 
 public interface ICColonne extends ICDoubleTas, Controleur{
 
+	public void decompacter();
+	
 }

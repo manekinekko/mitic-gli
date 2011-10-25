@@ -34,5 +34,13 @@ public class CTasDeCartesAlternees extends TasDeCartesAlternees implements ICTas
 	public ICCarte getCCarte(int number) {
 		return null;
 	}
+
+	@Override
+	public void compacter() {
+	}
+
+	@Override
+	public void decompacter() {
+	}
 	
 }

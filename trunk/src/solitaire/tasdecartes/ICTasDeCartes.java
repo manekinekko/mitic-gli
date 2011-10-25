@@ -36,5 +36,9 @@ public interface ICTasDeCartes extends Controleur {
 	public boolean isVide();
 
 	public void recopier(Tas tas);
+	
+	public void compacter();
+	
+	public void decompacter();
 
 }
