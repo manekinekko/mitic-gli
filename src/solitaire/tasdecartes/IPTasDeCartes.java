@@ -6,5 +6,9 @@ import solitaire.carte.ICCarte;
 public interface IPTasDeCartes extends Presentation {
 
 	public void add(ICCarte carte);
+
+	public void decompacter();
+
+	public void compacter();
 	
 }

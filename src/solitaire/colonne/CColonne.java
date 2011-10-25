@@ -18,5 +18,12 @@ public class CColonne extends Colonne implements ICColonne {
 	public Presentation getPresentation(){
 		return pColonne_;
 	}
-
+	
+	public void decompacter(){
+		ICTasDeCartes cachees = (ICTasDeCartes)super.cachees;
+		cachees.decompacter();
+		ICTasDeCartes visibles = (ICTasDeCartes)super.visibles;
+		visibles.decompacter();
+	}
+	
 }

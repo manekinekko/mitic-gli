@@ -34,4 +34,12 @@ public class CTasDeCartes extends TasDeCartes implements ICTasDeCartes{
 		}
 	}
 	
+	public void compacter(){
+		pTasDeCartes_.compacter();
+	}
+	
+	public void decompacter(){
+		pTasDeCartes_.decompacter();
+	}
+	
 }

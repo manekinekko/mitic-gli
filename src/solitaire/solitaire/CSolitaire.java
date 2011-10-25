@@ -13,6 +13,9 @@ import solitaire.tasdecartescolorees.ICTasDeCartesColorees;
 public class CSolitaire extends Solitaire implements ICSolitaire {
 
 	private PSolitaire pSolitaire_;
+	private ICSabot cSabot_;
+	private ICTasDeCartesColorees[] cTasDeCartesColorees_;
+	private ICColonne[] cColonnes_;
 
 	public CSolitaire(String nom, Usine usine) {
 		super(nom, usine);
@@ -28,20 +31,32 @@ public class CSolitaire extends Solitaire implements ICSolitaire {
 	public void initialiser() {
 		super.initialiser();
 
-		ICSabot cSabot = (CSabot) this.sabot;
+		cSabot_ = (CSabot) super.sabot;
 
-        ICTasDeCartesColorees[] cTasDeCartesColorees = new CTasDeCartesColorees[4];
+        cTasDeCartesColorees_ = new CTasDeCartesColorees[4];
         for(int i=0;i<4;i++){
-        	cTasDeCartesColorees[i] = (ICTasDeCartesColorees) super.pilesColorees[i];
+        	cTasDeCartesColorees_[i] = (ICTasDeCartesColorees) super.pilesColorees[i];
         }
         
-		ICColonne[] cColonnes = new CColonne[7];
+		cColonnes_ = new CColonne[7];
         for(int i=0;i<7;i++){
-            cColonnes[i] = (ICColonne) super.pilesAlternees[i];
+            cColonnes_[i] = (ICColonne) super.pilesAlternees[i];
         }
 
-		pSolitaire_ = new PSolitaire(this, cSabot, cTasDeCartesColorees, cColonnes);
+		pSolitaire_ = new PSolitaire(this);
        
+	}
+
+	public ICSabot getCSabot() {
+		return cSabot_;
+	}
+
+	public ICTasDeCartesColorees[] getCTasDeCartesColorees() {
+		return cTasDeCartesColorees_;
+	}
+
+	public ICColonne[] getCColonnes() {
+		return cColonnes_;
 	}
 	
 }

@@ -35,5 +35,13 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTasDe
 	public ICCarte getCCarte(int number) {
 		return null;
 	}
+
+	@Override
+	public void compacter() {
+	}
+
+	@Override
+	public void decompacter() {
+	}
 	
 }

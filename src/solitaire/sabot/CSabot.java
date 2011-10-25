@@ -18,5 +18,12 @@ public class CSabot extends Sabot implements ICSabot {
 	public Presentation getPresentation() {
 		return pSabot_;
 	}
+	
+	public void compacter(){
+		ICTasDeCartes cachees = (ICTasDeCartes)super.cachees;
+		cachees.compacter();
+		ICTasDeCartes visibles = (ICTasDeCartes)super.visibles;
+		visibles.compacter();
+	}
 
 }

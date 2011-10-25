@@ -1,9 +1,6 @@
 package solitaire.doubletas;
 
-import java.awt.Component;
-
 import javax.swing.JPanel;
-
 import solitaire.pac.Controleur;
 import solitaire.pac.Presentation;
 import solitaire.tasdecartes.ICTasDeCartes;
@@ -16,17 +13,16 @@ public class PDoubleTas extends JPanel implements IPDoubleTas, Presentation{
 	protected ICDoubleTas controleur_;
 
 	public PDoubleTas(ICDoubleTas controleur, ICTasDeCartes cTasCache, ICTasDeCartes cTasVisible){
-		super(null);
 		controleur_ = controleur;
 		cTasCache_ = cTasCache;
 		cTasVisible_ = cTasVisible;
-		add((Component) cTasCache_.getPresentation());
-		add((Component) cTasVisible_.getPresentation());
+		add((JPanel) cTasCache_.getPresentation());
+		add((JPanel) cTasVisible_.getPresentation());
 	}
 
 	@Override
 	public Controleur getControleur() {
-		return null;
+		return controleur_;
 	}
 
 }
