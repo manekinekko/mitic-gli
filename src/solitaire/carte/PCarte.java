@@ -2,13 +2,20 @@ package solitaire.carte;
 
 //import solitaire.controle.* ;
 import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
+import java.io.Serializable;
+
 import javax.swing.*;
 
 /**
  * Composant Presentation d'une carte
  */
-public class PCarte extends JPanel implements IPCarte {
+public class PCarte extends JPanel implements IPCarte, Transferable, Serializable {
 
+	private static final long serialVersionUID = 1L;
 	protected CCarte controle ; // controleur associe
 	protected JLabel face, dos;
 	protected ImageIcon icone; // image de la face
@@ -68,6 +75,38 @@ public class PCarte extends JPanel implements IPCarte {
 
 	public ImageIcon getIcone() {
 		return icone;
+	}
+
+	@Override
+	public Object getTransferData(DataFlavor flavor)
+			throws UnsupportedFlavorException, IOException {
+		
+		Object result = null;
+		if ( flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType) ){
+			result = this;
+		}
+		else if ( flavor.isMimeTypeEqual(new DataFlavor(String.class, null)) ){
+			result = null;
+		}
+		return result;
+	}
+
+	@Override
+	public DataFlavor[] getTransferDataFlavors() {
+		DataFlavor[] data = new DataFlavor[2];
+		try{
+			data[0] = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType);
+			data[1] = new DataFlavor(String.class, null);
+		}
+		catch(ClassNotFoundException e){
+		}
+		return data;
+	}
+
+	@Override
+	public boolean isDataFlavorSupported(DataFlavor flavor) {
+		return flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)
+				|| (flavor.isMimeTypeEqual(new DataFlavor(String.class, null)));
 	}
 
 } // PCarte
