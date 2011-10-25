@@ -1,8 +1,6 @@
 package solitaire.solitaire;
 
-import java.awt.Color;
 import java.awt.FlowLayout;
-
 import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JPanel;

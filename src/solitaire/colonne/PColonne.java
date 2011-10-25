@@ -1,10 +1,7 @@
 package solitaire.colonne;
 
-import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JPanel;
-
 import solitaire.carte.PCarte;
 import solitaire.doubletas.PDoubleTas;
 import solitaire.pac.Controleur;
