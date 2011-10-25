@@ -4,4 +4,6 @@ import solitaire.pac.Presentation;
 
 public interface IPColonne extends Presentation{
 
+	public void repositionner();
+	
 }

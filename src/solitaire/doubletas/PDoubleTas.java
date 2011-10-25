@@ -13,11 +13,19 @@ public class PDoubleTas extends JPanel implements IPDoubleTas, Presentation{
 	protected ICDoubleTas controleur_;
 
 	public PDoubleTas(ICDoubleTas controleur, ICTasDeCartes cTasCache, ICTasDeCartes cTasVisible){
+		super(null);
+		
 		controleur_ = controleur;
 		cTasCache_ = cTasCache;
 		cTasVisible_ = cTasVisible;
-		add((JPanel) cTasCache_.getPresentation());
-		add((JPanel) cTasVisible_.getPresentation());
+		
+		JPanel pTasCache = (JPanel) cTasCache_.getPresentation();
+		JPanel pTasVisible = (JPanel) cTasVisible_.getPresentation();
+		
+		add(pTasCache);
+		add(pTasVisible);
+		setComponentZOrder(pTasVisible, 0);
+	
 	}
 
 	@Override
