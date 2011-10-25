@@ -2,9 +2,7 @@ package solitaire.tasdecartes;
 
 import java.awt.Component;
 import java.awt.Dimension;
-
 import javax.swing.JPanel;
-
 import solitaire.carte.ICCarte;
 import solitaire.carte.PCarte;
 import solitaire.pac.Controleur;
@@ -17,7 +15,7 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes{
 
 	public PTasDeCartes(ICTasDeCartes controleur) {
 		super(null);
-		setPreferredSize(new Dimension(PCarte.largeur, PCarte.hauteur+ecartDecompacte*18));	
+		setSize(new Dimension(PCarte.largeur, PCarte.hauteur+ecartDecompacte*18));
 		controleur_ = controleur;
 	}
 

@@ -26,4 +26,8 @@ public class CColonne extends Colonne implements ICColonne {
 		visibles.decompacter();
 	}
 	
+	public void repositionner(){
+		pColonne_.repositionner();
+	}
+	
 }

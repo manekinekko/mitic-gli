@@ -28,10 +28,8 @@ public class CTasDeCartes extends TasDeCartes implements ICTasDeCartes{
 	
 	@Override
 	public void empiler(Carte carte){
-		if(super.isEmpilable(carte)){
 			super.empiler(carte);
 			pTasDeCartes_.add((ICCarte)carte);
-		}
 	}
 	
 	public void compacter(){

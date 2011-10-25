@@ -6,7 +6,8 @@ import solitaire.application.Usine;
 import solitaire.carte.ICCarte;
 import solitaire.pac.Presentation;
 
-public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTasDeCartesColorees{
+public class CTasDeCartesColorees extends TasDeCartesColorees implements
+		ICTasDeCartesColorees {
 
 	private PTasDeCartesColorees pTasDeCartesColorees_;
 
@@ -21,14 +22,9 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTasDe
 	}
 
 	@Override
-	public void empiler(Carte carte){
-		if(super.isEmpilable(carte)){
-			super.empiler(carte);
-			pTasDeCartesColorees_.add((ICCarte)carte);
-		}
-		else{
-			System.out.println("Ne peux pas empiler :)");
-		}
+	public void empiler(Carte carte) {
+		super.empiler(carte);
+		pTasDeCartesColorees_.add((ICCarte) carte);
 	}
 
 	@Override
@@ -43,5 +39,5 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTasDe
 	@Override
 	public void decompacter() {
 	}
-	
+
 }
