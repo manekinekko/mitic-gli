@@ -7,7 +7,7 @@ import java.awt.dnd.DragSource;
 import javax.swing.JPanel;
 import solitaire.carte.ICCarte;
 import solitaire.carte.PCarte;
-import solitaire.dnd.MyDragGestionListener;
+import solitaire.dnd.MyDragGestureListener;
 import solitaire.dnd.MyDragSourceListener;
 import solitaire.pac.Controleur;
 
@@ -26,7 +26,7 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes {
 		setSize(new Dimension(PCarte.largeur, PCarte.hauteur+ecartDecompacte*18));
 		controleur_ = controleur;
 		dragSource = new DragSource();
-		dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, new MyDragGestionListener(this, dragSource));
+		dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, new MyDragGestureListener(this, dragSource));
 	}
 
 	@Override
