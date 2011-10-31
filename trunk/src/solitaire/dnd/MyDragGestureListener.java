@@ -7,14 +7,14 @@ import java.awt.dnd.DragSource;
 import javax.swing.JPanel;
 import solitaire.carte.IPCarte;
 
-public class MyDragGestionListener  implements DragGestureListener{
+public class MyDragGestureListener  implements DragGestureListener{
 	protected IPCarte carteSelectionnee = null;
 	private JPanel jpanel_;
 	protected DragGestureEvent theInitialEvent;
 	protected DragSource dragSource_;
 	protected MyDragSourceListener myDragSourceListener = null;
 	
-	public MyDragGestionListener(JPanel jpanel, DragSource dragSource) {
+	public MyDragGestureListener(JPanel jpanel, DragSource dragSource) {
 		dragSource_ = dragSource;
 		jpanel_ = jpanel;
 		myDragSourceListener = new MyDragSourceListener(jpanel_);

@@ -3,9 +3,7 @@ package solitaire.tasdecartes;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragSource;
-
 import javax.swing.JPanel;
 import solitaire.carte.ICCarte;
 import solitaire.carte.PCarte;

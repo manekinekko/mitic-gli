@@ -1,5 +1,6 @@
 package solitaire.solitaire;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.Box;
 import javax.swing.JFrame;
@@ -47,6 +48,8 @@ public class PSolitaire extends JFrame implements IPSolitaire{
 		row.add(line2);
 		add(row);
 		
+		setBackground(Color.green);
+
 		setVisible(true);
 		setResizable(false);
 		pack();
