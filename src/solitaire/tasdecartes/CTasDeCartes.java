@@ -31,7 +31,7 @@ public class CTasDeCartes extends TasDeCartes implements ICTasDeCartes{
 			super.empiler(carte);
 			pTasDeCartes_.add((ICCarte)carte);
 	}
-	
+
 	public void compacter(){
 		pTasDeCartes_.compacter();
 	}
