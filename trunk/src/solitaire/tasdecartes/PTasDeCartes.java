@@ -13,25 +13,17 @@ import solitaire.dnd.MyDragGestureListener;
 import solitaire.dnd.MyDragSourceListener;
 import solitaire.pac.Controleur;
 
-public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable {
+public class PTasDeCartes extends JPanel implements IPTasDeCartes {
 
 	private static final long serialVersionUID = 1L;
 	protected ICTasDeCartes controleur_;
 	public static int ecartDecompacte = 20;
-
-	// DnD
-	protected DragSource dragSource = null;
-	protected MyDragSourceListener myDragSourceListener = null;
 
 	public PTasDeCartes(ICTasDeCartes controleur) {
 		super(null);
 		setSize(new Dimension(PCarte.largeur, PCarte.hauteur + ecartDecompacte
 				* 18));
 		controleur_ = controleur;
-		dragSource = new DragSource();
-		dragSource.createDefaultDragGestureRecognizer(this,
-				DnDConstants.ACTION_MOVE, new MyDragGestureListener(this,
-						dragSource));
 	}
 
 	@Override
@@ -68,30 +60,7 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable 
 	}
 
 	@Override
-	public Object getTransferData(DataFlavor flavor) {
-		Object result = null;
-		if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)) {
-			result = this;
-		}
-		return result;
+	public void remove() {
+		// TODO Auto-generated method stub
 	}
-
-	@Override
-	public DataFlavor[] getTransferDataFlavors() {
-		DataFlavor data[] = new DataFlavor[1];
-		try {
-			data[0] = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType);
-		} catch (ClassNotFoundException ex) {
-		}
-		return data;
-	}
-
-	@Override
-	public boolean isDataFlavorSupported(DataFlavor flavor) {
-		if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)) {
-			return true;
-		}
-		return false;
-	}
-
 }

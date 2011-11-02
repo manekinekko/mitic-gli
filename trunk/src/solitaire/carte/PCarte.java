@@ -85,18 +85,15 @@ public class PCarte extends JPanel implements IPCarte, Transferable, Serializabl
 		if ( flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType) ){
 			result = this;
 		}
-		else if ( flavor.isMimeTypeEqual(new DataFlavor(String.class, null)) ){
-			result = null;
-		}
+		
 		return result;
 	}
 
 	@Override
 	public DataFlavor[] getTransferDataFlavors() {
-		DataFlavor[] data = new DataFlavor[2];
+		DataFlavor[] data = new DataFlavor[1];
 		try{
 			data[0] = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType);
-			data[1] = new DataFlavor(String.class, null);
 		}
 		catch(ClassNotFoundException e){
 		}
@@ -105,8 +102,7 @@ public class PCarte extends JPanel implements IPCarte, Transferable, Serializabl
 
 	@Override
 	public boolean isDataFlavorSupported(DataFlavor flavor) {
-		return flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)
-				|| (flavor.isMimeTypeEqual(new DataFlavor(String.class, null)));
+		return flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType);
 	}
 
 } // PCarte
