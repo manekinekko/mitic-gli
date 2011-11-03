@@ -8,19 +8,18 @@ import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
 import java.awt.dnd.DragSourceDragEvent;
 import java.awt.dnd.DragSourceMotionListener;
-
 import javax.swing.JPanel;
-
-import solitaire.carte.IPCarte;
+import solitaire.carte.PCarte;
 
 public class MyDragGestureListener implements DragGestureListener,
 		DragSourceMotionListener {
-	protected IPCarte carteSelectionnee_ = null;
+	protected PCarte carteSelectionnee_ = null;
 	private JPanel jpanel_;
 	protected DragGestureEvent theInitialEvent;
 	protected DragSource dragSource_;
 	protected MyDragSourceListener myDragSourceListener = null;
 	private Window valise_;
+	private Object ob;
 
 	public MyDragGestureListener(JPanel jpanel, DragSource dragSource) {
 		dragSource_ = dragSource;
@@ -30,17 +29,14 @@ public class MyDragGestureListener implements DragGestureListener,
 
 	@Override
 	public void dragGestureRecognized(DragGestureEvent event) {
-		System.out.println("merde");
 		carteSelectionnee_ = null;
 		try {
 			Object obj = jpanel_.getComponentAt(event.getDragOrigin());
 			if ( obj != null ){
-				carteSelectionnee_ = (IPCarte) obj;
+				carteSelectionnee_ = (PCarte) obj;
 			}
 		} catch (Exception e) {
 		}
-
-		System.out.println(carteSelectionnee_);
 
 		if (carteSelectionnee_ != null) {
 
@@ -50,17 +46,21 @@ public class MyDragGestureListener implements DragGestureListener,
 			jpanel_.remove((Component) carteSelectionnee_);
 
 			valise_ = new Window((Window) (jpanel_.getRootPane().getParent()));
-			valise_.add((Component) carteSelectionnee_);
+			valise_.add(carteSelectionnee_);
 			valise_.pack();
 			valise_.setVisible(true);
 			jpanel_.validate();
 			jpanel_.repaint();
-
+			ob = new Object();
+			System.out.println(ob == null);
+			System.out.println(this);
 		}
 	}
 
 	@Override
 	public void dragMouseMoved(DragSourceDragEvent event) {
+		System.out.println(ob == null);
+		System.out.println(this);
 		if (valise_ != null) {
 			valise_.setLocation(1 + event.getX(), 1 + event.getY());
 		}
