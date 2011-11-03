@@ -3,7 +3,6 @@ package solitaire.doubletas;
 import java.awt.Color;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
-import java.awt.dnd.DragSourceMotionListener;
 import javax.swing.JPanel;
 import solitaire.dnd.MyDragGestureListener;
 import solitaire.dnd.MyDragSourceListener;
