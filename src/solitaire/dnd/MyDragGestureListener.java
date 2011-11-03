@@ -19,7 +19,6 @@ public class MyDragGestureListener implements DragGestureListener,
 	protected DragSource dragSource_;
 	protected MyDragSourceListener myDragSourceListener = null;
 	private Window valise_;
-	private Object ob;
 
 	public MyDragGestureListener(JPanel jpanel, DragSource dragSource) {
 		dragSource_ = dragSource;
@@ -51,16 +50,11 @@ public class MyDragGestureListener implements DragGestureListener,
 			valise_.setVisible(true);
 			jpanel_.validate();
 			jpanel_.repaint();
-			ob = new Object();
-			System.out.println(ob == null);
-			System.out.println(this);
 		}
 	}
 
 	@Override
 	public void dragMouseMoved(DragSourceDragEvent event) {
-		System.out.println(ob == null);
-		System.out.println(this);
 		if (valise_ != null) {
 			valise_.setLocation(1 + event.getX(), 1 + event.getY());
 		}
