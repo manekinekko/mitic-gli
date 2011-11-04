@@ -9,6 +9,7 @@ import solitaire.dnd.MyDragSourceListener;
 import solitaire.pac.Controleur;
 import solitaire.pac.Presentation;
 import solitaire.tasdecartes.ICTasDeCartes;
+import solitaire.tasdecartes.PTasDeCartes;
 
 public class PDoubleTas extends JPanel implements IPDoubleTas, Presentation {
 
@@ -23,19 +24,18 @@ public class PDoubleTas extends JPanel implements IPDoubleTas, Presentation {
 	public PDoubleTas(ICDoubleTas controleur, ICTasDeCartes cTasCache,
 			ICTasDeCartes cTasVisible) {
 		super(null);
-
+		
 		controleur_ = controleur;
 		cTasCache_ = cTasCache;
 		cTasVisible_ = cTasVisible;
 
-		JPanel pTasCache = (JPanel) cTasCache_.getPresentation();
-		JPanel pTasVisible = (JPanel) cTasVisible_.getPresentation();
-
+		PTasDeCartes pTasCache = (PTasDeCartes) cTasCache_.getPresentation();
+		PTasDeCartes pTasVisible = (PTasDeCartes) cTasVisible_.getPresentation();
+		
 		pTasVisible.setBackground(Color.black);
 		
 		myDragSourceListener_ = new MyDragSourceListener(pTasVisible);
 		dragSource_ = new DragSource();
-		// drag gesture ou drag source?
 		
 		myDragSourceMotionListener_ = new MyDragGestureListener(pTasVisible, dragSource_);
 		

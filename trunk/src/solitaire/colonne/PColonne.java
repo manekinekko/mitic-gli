@@ -1,7 +1,6 @@
 package solitaire.colonne;
 
 import java.awt.Dimension;
-import javax.swing.JPanel;
 import solitaire.carte.PCarte;
 import solitaire.doubletas.PDoubleTas;
 import solitaire.pac.Controleur;
@@ -17,10 +16,11 @@ public class PColonne extends PDoubleTas implements IPColonne{
 		super(controleur, cachees, visible);
 		controleur_ = controleur;
 		
-		JPanel pCache = (JPanel)cachees.getPresentation();
+		PTasDeCartes pCache = (PTasDeCartes)cachees.getPresentation();
 		pCache.setLocation(0, 0);
 		
 		setPreferredSize(new Dimension(PCarte.largeur, PCarte.hauteur+PTasDeCartes.ecartDecompacte*18));
+		repositionner();
 	}
 	
 	@Override
@@ -29,7 +29,7 @@ public class PColonne extends PDoubleTas implements IPColonne{
 	}
 	
 	public void repositionner(){
-		JPanel pVisible = (JPanel)cTasVisible_.getPresentation();
+		PTasDeCartes pVisible = (PTasDeCartes)cTasVisible_.getPresentation();
 		pVisible.setLocation(0, cTasCache_.getNombre()*PTasDeCartes.ecartDecompacte);
 	}
 
