@@ -18,8 +18,9 @@ public class MyDragSourceListener implements DragSourceListener{
 	
 	@Override
 	public void dragDropEnd(DragSourceDropEvent event) {
+		System.out.println("fin du drag?");
+
 		if ( event.getDropSuccess() ){
-			System.out.println("fin du drag?");
 			// TODO verifier la source a retirer !!
 			jpanel_.remove((Component)event.getSource());
 			jpanel_.validate();

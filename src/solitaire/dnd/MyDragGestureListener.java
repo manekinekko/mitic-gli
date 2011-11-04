@@ -10,30 +10,29 @@ import java.awt.dnd.DragSourceDragEvent;
 import java.awt.dnd.DragSourceMotionListener;
 import javax.swing.JPanel;
 import solitaire.carte.PCarte;
+import solitaire.tasdecartes.PTasDeCartes;
 
 public class MyDragGestureListener implements DragGestureListener,
 		DragSourceMotionListener {
 	protected PCarte carteSelectionnee_ = null;
-	private JPanel jpanel_;
+	private PTasDeCartes pTasDeCarte_;
 	protected DragGestureEvent theInitialEvent;
 	protected DragSource dragSource_;
 	protected MyDragSourceListener myDragSourceListener = null;
 	private Window valise_;
 
-	public MyDragGestureListener(JPanel jpanel, DragSource dragSource) {
+	public MyDragGestureListener(PTasDeCartes pTasDeCarte, DragSource dragSource) {
 		dragSource_ = dragSource;
-		jpanel_ = jpanel;
-		myDragSourceListener = new MyDragSourceListener(jpanel_);
+		pTasDeCarte_ = pTasDeCarte;
+		myDragSourceListener = new MyDragSourceListener(pTasDeCarte_);
 	}
 
 	@Override
 	public void dragGestureRecognized(DragGestureEvent event) {
 		carteSelectionnee_ = null;
 		try {
-			Object obj = jpanel_.getComponentAt(event.getDragOrigin());
-			if ( obj != null ){
-				carteSelectionnee_ = (PCarte) obj;
-			}
+			System.out.println(pTasDeCarte_.getLocation());
+			carteSelectionnee_ = (PCarte) pTasDeCarte_.getComponentAt(event.getDragOrigin().x, event.getDragOrigin().y-pTasDeCarte_.getY());
 		} catch (Exception e) {
 		}
 
@@ -42,14 +41,14 @@ public class MyDragGestureListener implements DragGestureListener,
 			theInitialEvent = event;
 			dragSource_.startDrag(event, DragSource.DefaultCopyDrop,
 					(Transferable) carteSelectionnee_, myDragSourceListener);
-			jpanel_.remove((Component) carteSelectionnee_);
+			pTasDeCarte_.remove((Component) carteSelectionnee_);
 
-			valise_ = new Window((Window) (jpanel_.getRootPane().getParent()));
+			valise_ = new Window((Window) (pTasDeCarte_.getRootPane().getParent()));
 			valise_.add(carteSelectionnee_);
 			valise_.pack();
 			valise_.setVisible(true);
-			jpanel_.validate();
-			jpanel_.repaint();
+			pTasDeCarte_.validate();
+			pTasDeCarte_.repaint();
 		}
 	}
 
