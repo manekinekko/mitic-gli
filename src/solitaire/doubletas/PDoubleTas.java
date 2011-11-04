@@ -5,7 +5,6 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
 import javax.swing.JPanel;
 import solitaire.dnd.MyDragGestureListener;
-import solitaire.dnd.MyDragSourceListener;
 import solitaire.pac.Controleur;
 import solitaire.pac.Presentation;
 import solitaire.tasdecartes.ICTasDeCartes;
@@ -17,7 +16,6 @@ public class PDoubleTas extends JPanel implements IPDoubleTas, Presentation {
 	protected ICTasDeCartes cTasCache_;
 	protected ICTasDeCartes cTasVisible_;
 	protected ICDoubleTas controleur_;
-	protected MyDragSourceListener myDragSourceListener_;
 	protected DragSource dragSource_;
 	private MyDragGestureListener myDragSourceMotionListener_;
 	
@@ -32,15 +30,11 @@ public class PDoubleTas extends JPanel implements IPDoubleTas, Presentation {
 		PTasDeCartes pTasCache = (PTasDeCartes) cTasCache_.getPresentation();
 		PTasDeCartes pTasVisible = (PTasDeCartes) cTasVisible_.getPresentation();
 		
-		pTasVisible.setBackground(Color.black);
-		
-		myDragSourceListener_ = new MyDragSourceListener(pTasVisible);
 		dragSource_ = new DragSource();
 		
-		myDragSourceMotionListener_ = new MyDragGestureListener(pTasVisible, dragSource_);
+		myDragSourceMotionListener_ = new MyDragGestureListener(cTasVisible_, dragSource_);
 		
-		dragSource_.createDefaultDragGestureRecognizer(this,
-				DnDConstants.ACTION_MOVE, myDragSourceMotionListener_);
+		dragSource_.createDefaultDragGestureRecognizer(this,DnDConstants.ACTION_MOVE, myDragSourceMotionListener_);
 
 		dragSource_.addDragSourceMotionListener(myDragSourceMotionListener_);
 		
