@@ -30,7 +30,7 @@ public class MyDragGestureListener implements DragGestureListener,
 		dragSource_ = dragSource;
 		cTasDeCarte_ = cTasDeCarte;
 		pTasDeCarte_ = (PTasDeCartes)cTasDeCarte_.getPresentation();
-		myDragSourceListener = new MyDragSourceListener(pTasDeCarte_);
+		myDragSourceListener = new MyDragSourceListener();
 	}
 
 	@Override
@@ -66,12 +66,6 @@ public class MyDragGestureListener implements DragGestureListener,
 	
 	class MyDragSourceListener implements DragSourceListener{
 
-		private JPanel jpanel_;
-
-		public MyDragSourceListener(JPanel jpanel) {
-			jpanel_ = jpanel;
-		}
-		
 		@Override
 		public void dragDropEnd(DragSourceDropEvent event) {
 			System.out.println("fin du drag?");
@@ -79,9 +73,9 @@ public class MyDragGestureListener implements DragGestureListener,
 
 			if ( event.getDropSuccess() ){
 				// TODO verifier la source a retirer !!
-				jpanel_.remove((Component)event.getSource());
-				jpanel_.validate();
-				jpanel_.repaint();
+				pTasDeCarte_.remove((Component)event.getSource());
+				pTasDeCarte_.validate();
+				pTasDeCarte_.repaint();
 			}
 		}
 
