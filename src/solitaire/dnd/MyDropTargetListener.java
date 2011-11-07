@@ -9,7 +9,7 @@ import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.io.IOException;
 
-import solitaire.tasdecartes.PTasDeCartes;
+import solitaire.carte.PCarte;
 
 public class MyDropTargetListener implements DropTargetListener{
 
@@ -30,10 +30,12 @@ public class MyDropTargetListener implements DropTargetListener{
 
 	@Override
 	public void drop(DropTargetDropEvent event) {
+		System.out.println("drop");
 		 Transferable transferable = event.getTransferable();
          try {
 			if (transferable.isDataFlavorSupported(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType))) {
-			     PTasDeCartes pTasDeCarte = (PTasDeCartes) transferable.getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
+				PCarte pCarte = (PCarte) transferable.getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
+				
 			 }
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
