@@ -34,7 +34,7 @@ public class PDoubleTas extends JPanel implements IPDoubleTas, Presentation {
 		PTasDeCartes pTasCache = (PTasDeCartes) cTasCache_.getPresentation();
 		PTasDeCartes pTasVisible = (PTasDeCartes) cTasVisible_.getPresentation();
 		
-		dropTarget_ = new DropTarget(this, new MyDropTargetListener());
+		dropTarget_ = new DropTarget(this, new MyDropTargetListener(cTasVisible_));
 		
 		//classes pour le drag
 		dragSource_ = new DragSource();
