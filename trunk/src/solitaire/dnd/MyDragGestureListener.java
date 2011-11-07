@@ -11,7 +11,6 @@ import java.awt.dnd.DragSourceDropEvent;
 import java.awt.dnd.DragSourceEvent;
 import java.awt.dnd.DragSourceListener;
 import java.awt.dnd.DragSourceMotionListener;
-import javax.swing.JPanel;
 import solitaire.carte.PCarte;
 import solitaire.tasdecartes.ICTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
@@ -54,6 +53,13 @@ public class MyDragGestureListener implements DragGestureListener,
 			valise_.setVisible(true);
 			pTasDeCarte_.validate();
 			pTasDeCarte_.repaint();
+			
+			try {
+				cTasDeCarte_.depiler();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		}
 	}
 
@@ -69,14 +75,17 @@ public class MyDragGestureListener implements DragGestureListener,
 		@Override
 		public void dragDropEnd(DragSourceDropEvent event) {
 			System.out.println("fin du drag?");
-			valise_.setVisible(false);
-
+			
 			if ( event.getDropSuccess() ){
-				// TODO verifier la source a retirer !!
 				pTasDeCarte_.remove((Component)event.getSource());
 				pTasDeCarte_.validate();
 				pTasDeCarte_.repaint();
+			} else {
+				cTasDeCarte_.empiler(carteSelectionnee_.getControleur());
+				valise_.remove(carteSelectionnee_);
 			}
+			
+			valise_.setVisible(false);
 		}
 
 		@Override
