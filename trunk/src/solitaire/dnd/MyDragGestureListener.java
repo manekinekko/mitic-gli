@@ -50,7 +50,6 @@ public class MyDragGestureListener implements DragGestureListener,
 			valise_ = new Window((Window) (pTasDeCarte_.getRootPane().getParent()));
 			valise_.add(carteSelectionnee_);
 			valise_.pack();
-			valise_.setVisible(true);
 			pTasDeCarte_.validate();
 			pTasDeCarte_.repaint();
 			
@@ -59,7 +58,6 @@ public class MyDragGestureListener implements DragGestureListener,
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
 		}
 	}
 
@@ -67,6 +65,9 @@ public class MyDragGestureListener implements DragGestureListener,
 	public void dragMouseMoved(DragSourceDragEvent event) {
 		if (valise_ != null) {
 			valise_.setLocation(1 + event.getX(), 1 + event.getY());
+			if(!valise_.isVisible()){
+				valise_.setVisible(true);
+			}
 		}
 	}
 	
@@ -77,7 +78,6 @@ public class MyDragGestureListener implements DragGestureListener,
 			System.out.println("fin du drag?");
 			
 			if ( event.getDropSuccess() ){
-				pTasDeCarte_.remove((Component)event.getSource());
 				pTasDeCarte_.validate();
 				pTasDeCarte_.repaint();
 			} else {
