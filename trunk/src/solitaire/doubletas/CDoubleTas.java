@@ -1,13 +1,14 @@
 package solitaire.doubletas;
 
+import java.util.Observer;
 import solitaire.application.DoubleTas;
 import solitaire.application.Tas;
 import solitaire.pac.Presentation;
 import solitaire.tasdecartes.ICTasDeCartes;
 
-public class CDoubleTas extends DoubleTas implements ICDoubleTas{
+public class CDoubleTas extends DoubleTas implements ICDoubleTas {
 
-	private IPDoubleTas pDoubleTas_;
+	private PDoubleTas pDoubleTas_;
 
 	public CDoubleTas(Tas cache, Tas visible) {
 		super(cache, visible);
@@ -17,6 +18,14 @@ public class CDoubleTas extends DoubleTas implements ICDoubleTas{
 	@Override
 	public Presentation getPresentation() {
 		return pDoubleTas_;
+	}
+
+	@Override
+	public void addObserver(Observer o) {
+	}
+
+	@Override
+	public void empilerCarteSurTasColore() {
 	}
 
 }

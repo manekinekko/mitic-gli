@@ -11,53 +11,73 @@ import java.awt.dnd.DragSourceDropEvent;
 import java.awt.dnd.DragSourceEvent;
 import java.awt.dnd.DragSourceListener;
 import java.awt.dnd.DragSourceMotionListener;
+
+import solitaire.carte.CCarte;
 import solitaire.carte.PCarte;
+import solitaire.tasdecartes.CTasDeCartes;
 import solitaire.tasdecartes.ICTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
 
-public class MyDragGestureListener implements DragGestureListener,
-		DragSourceMotionListener {
-	protected PCarte carteSelectionnee_ = null;
-	private ICTasDeCartes cTasDeCarte_;
-	private PTasDeCartes pTasDeCarte_;
-	protected DragGestureEvent theInitialEvent;
+public class MyDragGestureListener implements DragGestureListener, DragSourceMotionListener {
+	private ICTasDeCartes cTasDeCartes_;
+	private PTasDeCartes pTasDeCartes_;
 	protected DragSource dragSource_;
 	protected MyDragSourceListener myDragSourceListener = null;
 	private Window valise_;
+	private CTasDeCartes cTasDeCartesTemp_;
 
-	public MyDragGestureListener(ICTasDeCartes cTasDeCarte, DragSource dragSource) {
+	public MyDragGestureListener(ICTasDeCartes cTasDeCartes, DragSource dragSource) {
 		dragSource_ = dragSource;
-		cTasDeCarte_ = cTasDeCarte;
-		pTasDeCarte_ = (PTasDeCartes)cTasDeCarte_.getPresentation();
+		cTasDeCartes_ = cTasDeCartes;
+		pTasDeCartes_ = (PTasDeCartes) cTasDeCartes_.getPresentation();
 		myDragSourceListener = new MyDragSourceListener();
 	}
 
 	@Override
 	public void dragGestureRecognized(DragGestureEvent event) {
-		carteSelectionnee_ = null;
+		PCarte pCarteSelectionnee = null;
+		CCarte cCarteSelectionnee = null;
 		try {
-			carteSelectionnee_ = (PCarte) pTasDeCarte_.getComponentAt(event.getDragOrigin().x, event.getDragOrigin().y-pTasDeCarte_.getY());
+			pCarteSelectionnee = (PCarte) pTasDeCartes_.getComponentAt(event.getDragOrigin().x, event.getDragOrigin().y - pTasDeCartes_.getY());
+			cCarteSelectionnee = (CCarte) pCarteSelectionnee.getControleur();
+
 		} catch (Exception e) {
 		}
 
-		if (carteSelectionnee_ != null) {
+		if (pCarteSelectionnee != null) {
 
-			theInitialEvent = event;
-			dragSource_.startDrag(event, DragSource.DefaultCopyDrop,
-					(Transferable) carteSelectionnee_, myDragSourceListener);
-			pTasDeCarte_.remove((Component) carteSelectionnee_);
+			CTasDeCartes cTasDeCartesTempInverse_ = new CTasDeCartes("", null);
+			cTasDeCartesTemp_ = new CTasDeCartes("", null);
+			PTasDeCartes pTasDeCartesTemp = (PTasDeCartes) cTasDeCartesTemp_.getPresentation();
 
-			valise_ = new Window((Window) (pTasDeCarte_.getRootPane().getParent()));
-			valise_.add(carteSelectionnee_);
-			valise_.pack();
-			pTasDeCarte_.validate();
-			pTasDeCarte_.repaint();
-			
+			CCarte cCarte;
 			try {
-				cTasDeCarte_.depiler();
+				do {
+					cCarte = (CCarte) (cTasDeCartes_.getSommet());
+					cTasDeCartes_.depiler();
+					cTasDeCartesTempInverse_.empiler(cCarte);
+
+				} while (!cCarte.equals(cCarteSelectionnee));
+				
+				while(!cTasDeCartesTempInverse_.isVide()){
+					cTasDeCartesTemp_.empiler(cTasDeCartesTempInverse_.getSommet());
+					cTasDeCartesTempInverse_.depiler();
+				}
+				
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+			dragSource_.startDrag(event, DragSource.DefaultCopyDrop, (Transferable) pTasDeCartesTemp, myDragSourceListener);
+			pTasDeCartes_.remove((Component) pCarteSelectionnee);
+
+			valise_ = new Window((Window) (pTasDeCartes_.getRootPane().getParent()));
+			valise_.add((PTasDeCartes) pTasDeCartesTemp);
+			valise_.pack();
+			pTasDeCartes_.validate();
+			pTasDeCartes_.repaint();
+
 		}
 	}
 
@@ -65,26 +85,36 @@ public class MyDragGestureListener implements DragGestureListener,
 	public void dragMouseMoved(DragSourceDragEvent event) {
 		if (valise_ != null) {
 			valise_.setLocation(1 + event.getX(), 1 + event.getY());
-			if(!valise_.isVisible()){
+			if (!valise_.isVisible()) {
 				valise_.setVisible(true);
 			}
 		}
 	}
-	
-	class MyDragSourceListener implements DragSourceListener{
+
+	class MyDragSourceListener implements DragSourceListener {
 
 		@Override
 		public void dragDropEnd(DragSourceDropEvent event) {
-			
-			if ( event.getDropSuccess() ){
-				System.out.println("success");
-				pTasDeCarte_.validate();
-				pTasDeCarte_.repaint();
+
+			if (event.getDropSuccess()) {
+				pTasDeCartes_.validate();
+				pTasDeCartes_.repaint();
 			} else {
-				cTasDeCarte_.empiler(carteSelectionnee_.getControleur());
-				valise_.remove(carteSelectionnee_);
+
+				while (!cTasDeCartesTemp_.isVide()) {
+					try {
+						cTasDeCartes_.empiler(cTasDeCartesTemp_.getSommet());
+						cTasDeCartesTemp_.depiler();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+				}
+
+				cTasDeCartes_.decompacter();
+				valise_.remove((PTasDeCartes) cTasDeCartesTemp_.getPresentation());
 			}
-			
+
 			valise_.setVisible(false);
 		}
 

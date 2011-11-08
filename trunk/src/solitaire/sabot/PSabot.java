@@ -48,6 +48,34 @@ public class PSabot extends PDoubleTas implements IPSabot {
 			}
 		});
 		
+		//ajoute la carte en bas du tas visible dans le tas colore correspondant, si bien sur c'est possible
+		/*this.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//double click
+				if(e.getClickCount() == 2){
+					controleur.empilerCarteSurTasColore();
+				}
+			}
+		});*/
+		
 	}
 
 }

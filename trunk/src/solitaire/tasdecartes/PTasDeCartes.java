@@ -2,12 +2,18 @@ package solitaire.tasdecartes;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
+import java.io.Serializable;
+
 import javax.swing.JPanel;
 import solitaire.carte.ICCarte;
 import solitaire.carte.PCarte;
 import solitaire.pac.Controleur;
 
-public class PTasDeCartes extends JPanel implements IPTasDeCartes {
+public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	protected ICTasDeCartes controleur_;
@@ -54,14 +60,9 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes {
 	}
 
 	@Override
-	public void remove() {
-	}
-
-	@Override
 	public void decompacterHorizontal() {
 		
 		int componentNumber = getComponentCount();
-		System.out.println(componentNumber);
 		Component carte;
 		int i;
 		for (i = 0; i < componentNumber-3; i++) {
@@ -75,5 +76,33 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes {
 			setComponentZOrder(carte, 0);
 		}
 		
+	}
+	
+	@Override
+	public Object getTransferData(DataFlavor flavor)
+			throws UnsupportedFlavorException, IOException {
+		
+		Object result = null;
+		if ( flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType) ){
+			result = this;
+		}
+		
+		return result;
+	}
+
+	@Override
+	public DataFlavor[] getTransferDataFlavors() {
+		DataFlavor[] data = new DataFlavor[1];
+		try{
+			data[0] = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType);
+		}
+		catch(ClassNotFoundException e){
+		}
+		return data;
+	}
+
+	@Override
+	public boolean isDataFlavorSupported(DataFlavor flavor) {
+		return flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType);
 	}
 }

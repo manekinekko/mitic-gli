@@ -7,8 +7,6 @@ public interface IPTasDeCartes extends Presentation {
 
 	public void add(ICCarte carte);
 
-	public void remove();
-
 	public void decompacter();
 
 	public void compacter();
