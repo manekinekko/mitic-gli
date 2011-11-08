@@ -14,10 +14,10 @@ import solitaire.tasdecartes.ICTasDeCartes;
 
 public class MyDropTargetListener implements DropTargetListener {
 
-	private ICTasDeCartes cTasVisible_;
+	private ICTasDeCartes cTasDeCartes_;
 
-	public MyDropTargetListener(ICTasDeCartes cTasVisible) {
-		cTasVisible_ = cTasVisible;
+	public MyDropTargetListener(ICTasDeCartes cTasDeCartes) {
+		cTasDeCartes_ = cTasDeCartes;
 	}
 
 	@Override
@@ -45,9 +45,10 @@ public class MyDropTargetListener implements DropTargetListener {
 				PCarte pCarte = (PCarte) transferable
 						.getTransferData(new DataFlavor(
 								DataFlavor.javaJVMLocalObjectMimeType));
-				if (cTasVisible_.isEmpilable(pCarte.getControleur())) {
-					cTasVisible_.empiler(pCarte.getControleur());
-					cTasVisible_.decompacter();
+				if (cTasDeCartes_.isEmpilable(pCarte.getControleur())) {
+					cTasDeCartes_.empiler(pCarte.getControleur());
+					cTasDeCartes_.decompacter();
+					System.out.println("je decompacte");
 					event.getDropTargetContext().dropComplete(true);
 				} else {
 					event.rejectDrop();

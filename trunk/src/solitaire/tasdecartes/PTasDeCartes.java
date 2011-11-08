@@ -24,7 +24,6 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes {
 	public void add(ICCarte carte) {
 		JPanel pCarte = (JPanel) carte.getPresentation();
 		add(pCarte);
-		repaint();
 	}
 
 	@Override
@@ -34,6 +33,7 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes {
 
 	@Override
 	public void decompacter() {
+		System.out.println("pdecompacter");
 		int componentNumber = getComponentCount();
 		Component carte;
 		for (int i = 0; i < componentNumber; i++) {
@@ -55,6 +55,25 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes {
 
 	@Override
 	public void remove() {
-		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void decompacterHorizontal() {
+		
+		int componentNumber = getComponentCount();
+		System.out.println(componentNumber);
+		Component carte;
+		int i;
+		for (i = 0; i < componentNumber-3; i++) {
+			carte = getComponent(i);
+			carte.setLocation(0, 0);
+			setComponentZOrder(carte, 0);
+		}
+		for (int j = i; j < componentNumber; j++) {
+			carte = getComponent(j);
+			carte.setLocation((j-i) * ecartDecompacte,0);
+			setComponentZOrder(carte, 0);
+		}
+		
 	}
 }

@@ -3,11 +3,8 @@ package solitaire.doubletas;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
 import java.awt.dnd.DropTarget;
-
 import javax.swing.JPanel;
-
 import solitaire.dnd.MyDragGestureListener;
-import solitaire.dnd.MyDropTargetListener;
 import solitaire.pac.Controleur;
 import solitaire.pac.Presentation;
 import solitaire.tasdecartes.ICTasDeCartes;
@@ -21,7 +18,6 @@ public class PDoubleTas extends JPanel implements IPDoubleTas, Presentation {
 	protected ICDoubleTas controleur_;
 	protected DragSource dragSource_;
 	private MyDragGestureListener myDragSourceMotionListener_;
-	private DropTarget dropTarget_;
 	
 	public PDoubleTas(ICDoubleTas controleur, ICTasDeCartes cTasCache,
 			ICTasDeCartes cTasVisible) {
@@ -33,8 +29,6 @@ public class PDoubleTas extends JPanel implements IPDoubleTas, Presentation {
 
 		PTasDeCartes pTasCache = (PTasDeCartes) cTasCache_.getPresentation();
 		PTasDeCartes pTasVisible = (PTasDeCartes) cTasVisible_.getPresentation();
-		
-		dropTarget_ = new DropTarget(this, new MyDropTargetListener(cTasVisible_));
 		
 		//classes pour le drag
 		dragSource_ = new DragSource();
