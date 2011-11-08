@@ -5,6 +5,7 @@ import solitaire.application.TasDeCartesAlternees;
 import solitaire.application.Usine;
 import solitaire.carte.ICCarte;
 import solitaire.pac.Presentation;
+import solitaire.tasdecartes.PTasDeCartes;
 
 public class CTasDeCartesAlternees extends TasDeCartesAlternees implements
 		ICTasDeCartesAlternees {
@@ -33,10 +34,12 @@ public class CTasDeCartesAlternees extends TasDeCartesAlternees implements
 
 	@Override
 	public void compacter() {
+		((PTasDeCartes) pTasDeCartesAlternees_).compacter();
 	}
 
 	@Override
 	public void decompacter() {
+		((PTasDeCartes) pTasDeCartesAlternees_).decompacter();
 	}
 
 }

@@ -12,5 +12,7 @@ public interface IPTasDeCartes extends Presentation {
 	public void decompacter();
 
 	public void compacter();
+
+	public void decompacterHorizontal();
 	
 }
