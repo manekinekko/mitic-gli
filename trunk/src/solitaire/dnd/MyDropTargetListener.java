@@ -37,7 +37,6 @@ public class MyDropTargetListener implements DropTargetListener {
 
 	@Override
 	public void drop(DropTargetDropEvent event) {
-		System.out.println("drop");
 		Transferable transferable = event.getTransferable();
 		try {
 			if (transferable.isDataFlavorSupported(new DataFlavor(
@@ -48,10 +47,7 @@ public class MyDropTargetListener implements DropTargetListener {
 				if (cTasDeCartes_.isEmpilable(pCarte.getControleur())) {
 					cTasDeCartes_.empiler(pCarte.getControleur());
 					cTasDeCartes_.decompacter();
-					System.out.println("je decompacte");
 					event.getDropTargetContext().dropComplete(true);
-				} else {
-					event.rejectDrop();
 				}
 			}
 		} catch (ClassNotFoundException e) {

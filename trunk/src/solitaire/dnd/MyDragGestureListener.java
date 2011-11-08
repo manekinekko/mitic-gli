@@ -75,9 +75,9 @@ public class MyDragGestureListener implements DragGestureListener,
 
 		@Override
 		public void dragDropEnd(DragSourceDropEvent event) {
-			System.out.println("fin du drag?");
 			
 			if ( event.getDropSuccess() ){
+				System.out.println("success");
 				pTasDeCarte_.validate();
 				pTasDeCarte_.repaint();
 			} else {
