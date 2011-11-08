@@ -37,7 +37,6 @@ public class CTasDeCartes extends TasDeCartes implements ICTasDeCartes{
 	}
 	
 	public void decompacter(){
-		System.out.println("cdecompacter");
 		pTasDeCartes_.decompacter();
 	}
 	

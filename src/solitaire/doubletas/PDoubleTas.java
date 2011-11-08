@@ -2,7 +2,6 @@ package solitaire.doubletas;
 
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
-import java.awt.dnd.DropTarget;
 import javax.swing.JPanel;
 import solitaire.dnd.MyDragGestureListener;
 import solitaire.pac.Controleur;
