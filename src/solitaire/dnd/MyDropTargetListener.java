@@ -9,8 +9,10 @@ import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.io.IOException;
 
-import solitaire.carte.PCarte;
+import solitaire.tasdecartes.CTasDeCartes;
 import solitaire.tasdecartes.ICTasDeCartes;
+import solitaire.tasdecartes.PTasDeCartes;
+import solitaire.tasdecartesalternees.CTasDeCartesAlternees;
 
 public class MyDropTargetListener implements DropTargetListener {
 
@@ -39,13 +41,13 @@ public class MyDropTargetListener implements DropTargetListener {
 	public void drop(DropTargetDropEvent event) {
 		Transferable transferable = event.getTransferable();
 		try {
-			if (transferable.isDataFlavorSupported(new DataFlavor(
-					DataFlavor.javaJVMLocalObjectMimeType))) {
-				PCarte pCarte = (PCarte) transferable
-						.getTransferData(new DataFlavor(
-								DataFlavor.javaJVMLocalObjectMimeType));
-				if (cTasDeCartes_.isEmpilable(pCarte.getControleur())) {
-					cTasDeCartes_.empiler(pCarte.getControleur());
+			if (transferable.isDataFlavorSupported(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType))) {
+				PTasDeCartes pTasDeCartes = (PTasDeCartes) transferable.getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
+
+				CTasDeCartes cTasDeCartesRecu = (CTasDeCartes) pTasDeCartes.getControleur();
+
+				if (cTasDeCartes_.isEmpilable(cTasDeCartesRecu.getBase())) {
+					cTasDeCartes_.empiler(cTasDeCartesRecu);
 					cTasDeCartes_.decompacter();
 					event.getDropTargetContext().dropComplete(true);
 				}
@@ -55,6 +57,8 @@ public class MyDropTargetListener implements DropTargetListener {
 		} catch (UnsupportedFlavorException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

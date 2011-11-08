@@ -2,12 +2,10 @@ package solitaire.tasdecartes;
 
 import solitaire.application.Carte;
 import solitaire.application.Tas;
-import solitaire.carte.ICCarte;
+import solitaire.carte.CCarte;
 import solitaire.pac.Controleur;
 
 public interface ICTasDeCartes extends Controleur {
-
-	public ICCarte getCCarte(int number);
 
 	public void depiler() throws Exception;
 
@@ -40,5 +38,7 @@ public interface ICTasDeCartes extends Controleur {
 	public void compacter();
 	
 	public void decompacter();
+
+	public Carte getSommet() throws Exception;
 
 }

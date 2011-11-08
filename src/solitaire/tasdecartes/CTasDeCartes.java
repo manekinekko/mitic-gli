@@ -18,14 +18,6 @@ public class CTasDeCartes extends TasDeCartes implements ICTasDeCartes{
 		return pTasDeCartes_;
 	}
 
-	public ICCarte getCCarte(int number){
-		try {
-			return (ICCarte)super.getCarte(number);
-		} catch (Exception e) {
-			return null;
-		}
-	}
-	
 	@Override
 	public void empiler(Carte carte){
 		super.empiler(carte);

@@ -2,6 +2,8 @@ package solitaire.doubletas;
 
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 import solitaire.dnd.MyDragGestureListener;
 import solitaire.pac.Controleur;
@@ -18,7 +20,7 @@ public class PDoubleTas extends JPanel implements IPDoubleTas, Presentation {
 	protected DragSource dragSource_;
 	private MyDragGestureListener myDragSourceMotionListener_;
 	
-	public PDoubleTas(ICDoubleTas controleur, ICTasDeCartes cTasCache,
+	public PDoubleTas(final ICDoubleTas controleur, ICTasDeCartes cTasCache,
 			ICTasDeCartes cTasVisible) {
 		super(null);
 		
@@ -38,6 +40,7 @@ public class PDoubleTas extends JPanel implements IPDoubleTas, Presentation {
 		add(pTasCache);
 		add(pTasVisible);
 		setComponentZOrder(pTasVisible, 0);
+		
 	}
 
 	@Override

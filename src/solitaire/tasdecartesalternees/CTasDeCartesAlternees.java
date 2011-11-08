@@ -28,11 +28,6 @@ public class CTasDeCartesAlternees extends TasDeCartesAlternees implements
 	}
 
 	@Override
-	public ICCarte getCCarte(int number) {
-		return null;
-	}
-
-	@Override
 	public void compacter() {
 		((PTasDeCartes) pTasDeCartesAlternees_).compacter();
 	}
