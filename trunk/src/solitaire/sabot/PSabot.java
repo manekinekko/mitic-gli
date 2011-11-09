@@ -22,7 +22,6 @@ public class PSabot extends PDoubleTas implements IPSabot {
 		pVisible.setLocation(PCarte.largeur+5, 0);
 
 		setPreferredSize(new Dimension(PCarte.largeur*3,PCarte.hauteur));
-		setBackground(Color.red);
 
 		pCache.addMouseListener(new MouseListener() {
 			

@@ -8,7 +8,10 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.io.Serializable;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
+
 import solitaire.carte.ICCarte;
 import solitaire.carte.PCarte;
 import solitaire.pac.Controleur;
@@ -24,6 +27,7 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 		setSize(new Dimension(PCarte.largeur, PCarte.hauteur + ecartDecompacte
 				* 18));
 		controleur_ = controleur;
+		setOpaque(false);
 	}
 
 	@Override
@@ -104,5 +108,11 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 	@Override
 	public boolean isDataFlavorSupported(DataFlavor flavor) {
 		return flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType);
+	}
+
+	@Override
+	public void redessiner() {
+		System.out.println("PTasDeCartes.redessiner()");
+		repaint();
 	}
 }
