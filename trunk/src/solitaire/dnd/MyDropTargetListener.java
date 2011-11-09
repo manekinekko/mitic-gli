@@ -41,16 +41,27 @@ public class MyDropTargetListener implements DropTargetListener {
 	public void drop(DropTargetDropEvent event) {
 		Transferable transferable = event.getTransferable();
 		try {
-			if (transferable.isDataFlavorSupported(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType))) {
-				PTasDeCartes pTasDeCartes = (PTasDeCartes) transferable.getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
-
+			if (transferable.isDataFlavorSupported(new DataFlavor(
+					DataFlavor.javaJVMLocalObjectMimeType))) {
+				PTasDeCartes pTasDeCartes = (PTasDeCartes) transferable
+						.getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
 				CTasDeCartes cTasDeCartesRecu = (CTasDeCartes) pTasDeCartes.getControleur();
 
-				if (cTasDeCartes_.isEmpilable(cTasDeCartesRecu.getBase())) {
-					cTasDeCartes_.empiler(cTasDeCartesRecu);
-					cTasDeCartes_.decompacter();
-					event.getDropTargetContext().dropComplete(true);
+				if (cTasDeCartes_.isAlterne()) {
+					if (cTasDeCartes_.isEmpilable(cTasDeCartesRecu.getBase())) {
+						cTasDeCartes_.empiler(cTasDeCartesRecu);
+						cTasDeCartes_.decompacter();
+						event.getDropTargetContext().dropComplete(true);
+					}
+				} else {
+					if (cTasDeCartes_.getNombre() == 1
+							&& cTasDeCartes_.isEmpilable(cTasDeCartesRecu.getBase())) {
+						cTasDeCartes_.empiler(cTasDeCartesRecu);
+						event.getDropTargetContext().dropComplete(true);
+						cTasDeCartes_.compacter();
+					}
 				}
+
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
