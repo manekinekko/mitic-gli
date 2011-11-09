@@ -2,13 +2,11 @@ package Observer;
 
 import java.util.Observable;
 
-import solitaire.doubletas.ICDoubleTas;
-
 public class MyObservable extends Observable{
 
-	private ICDoubleTas doubleTas_;
+	private Object doubleTas_;
 
-	public MyObservable(ICDoubleTas doubleTas) {
+	public MyObservable(Object doubleTas) {
 		doubleTas_ = doubleTas;
 	}
 	
@@ -16,7 +14,7 @@ public class MyObservable extends Observable{
 		super.setChanged();
 	}
 
-	public ICDoubleTas getDoubleTas() {
+	public Object getDoubleTas() {
 		return doubleTas_;
 	}
 	

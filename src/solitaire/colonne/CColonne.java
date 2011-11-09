@@ -1,5 +1,6 @@
 package solitaire.colonne;
 
+import java.util.Observable;
 import java.util.Observer;
 
 import solitaire.application.Colonne;
@@ -7,11 +8,13 @@ import solitaire.application.Usine;
 import solitaire.carte.CCarte;
 import solitaire.carte.PCarte;
 import solitaire.pac.Presentation;
+import solitaire.tasdecartes.CTasDeCartes;
 import solitaire.tasdecartes.ICTasDeCartes;
+import solitaire.tasdecartes.IPTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
 import Observer.MyObservable;
 
-public class CColonne extends Colonne implements ICColonne {
+public class CColonne extends Colonne implements ICColonne, Observer {
 
 	private IPColonne pColonne_;
 	private MyObservable observable_;
@@ -25,6 +28,7 @@ public class CColonne extends Colonne implements ICColonne {
 
 		pColonne_ = new PColonne(this, cachees_, visibles_);
 		observable_ = new MyObservable(this);
+		((CTasDeCartes)cachees_).addObserver(this);
 	}
 
 	@Override
@@ -54,6 +58,11 @@ public class CColonne extends Colonne implements ICColonne {
 		CCarte cCarte = (CCarte) super.getSommet();
 		((PTasDeCartes) visibles_.getPresentation()).remove((PCarte) cCarte.getPresentation());
 		super.depiler();
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		((IPTasDeCartes)cachees_.getPresentation()).redessiner();
 	}
 
 }
