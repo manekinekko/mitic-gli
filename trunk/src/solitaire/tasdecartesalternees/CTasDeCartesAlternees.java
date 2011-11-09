@@ -25,6 +25,14 @@ public class CTasDeCartesAlternees extends TasDeCartesAlternees implements
 	public void empiler(Carte carte) {
 		super.empiler(carte);
 		pTasDeCartesAlternees_.add((ICCarte) carte);
+		for (int i = 1; i <= this.getNombre(); i++) {
+			try {
+				System.out.print("ctas:"+this.getCarte(i)+" ; ");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println();
 	}
 
 	@Override
