@@ -7,11 +7,8 @@ import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.io.Serializable;
-
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.border.EtchedBorder;
-
+import solitaire.carte.CCarte;
 import solitaire.carte.ICCarte;
 import solitaire.carte.PCarte;
 import solitaire.pac.Controleur;
@@ -33,7 +30,7 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 	@Override
 	public void add(ICCarte carte) {
 		JPanel pCarte = (JPanel) carte.getPresentation();
-		add(pCarte);
+		add(pCarte, null);
 		repaint();
 	}
 
@@ -44,6 +41,15 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 
 	@Override
 	public void decompacter() {
+		
+		Component comp[] = getComponents();
+		for (int i = 0; i < comp.length; i++) {
+			PCarte component = (PCarte)comp[i];
+			CCarte carte = (CCarte) component.getControleur();
+			System.out.print("ptas:"+carte+" ; ");
+		}
+		System.out.println();
+		
 		int componentNumber = getComponentCount();
 		Component carte;
 		for (int i = 0; i < componentNumber; i++) {
@@ -112,7 +118,12 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 
 	@Override
 	public void redessiner() {
-		System.out.println("PTasDeCartes.redessiner()");
 		repaint();
+	}
+
+	@Override
+	public void remove(PCarte pCarte) {
+        super.remove(pCarte);
+        repaint();
 	}
 }

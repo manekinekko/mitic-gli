@@ -2,6 +2,7 @@ package solitaire.tasdecartes;
 
 import solitaire.pac.Presentation;
 import solitaire.carte.ICCarte;
+import solitaire.carte.PCarte;
 
 public interface IPTasDeCartes extends Presentation {
 
@@ -14,5 +15,7 @@ public interface IPTasDeCartes extends Presentation {
 	public void decompacterHorizontal();
 
 	public void redessiner();
+
+	public void remove(PCarte pCarte);
 	
 }
