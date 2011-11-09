@@ -56,7 +56,9 @@ public class CColonne extends Colonne implements ICColonne, Observer {
 
 	public void depiler() throws Exception {
 		CCarte cCarte = (CCarte) super.getSommet();
-		((PTasDeCartes) visibles_.getPresentation()).remove((PCarte) cCarte.getPresentation());
+		PTasDeCartes pVisible = ((PTasDeCartes) visibles_.getPresentation());
+		pVisible.remove((PCarte) cCarte.getPresentation());
+		pVisible.redessiner();
 		super.depiler();
 	}
 
