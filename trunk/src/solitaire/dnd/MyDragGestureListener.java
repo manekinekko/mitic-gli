@@ -38,7 +38,8 @@ public class MyDragGestureListener implements DragGestureListener, DragSourceMot
 		PCarte pCarteSelectionnee = null;
 		CCarte cCarteSelectionnee = null;
 		try {
-			pCarteSelectionnee = (PCarte) pTasDeCartes_.getComponentAt(event.getDragOrigin().x, event.getDragOrigin().y - pTasDeCartes_.getY());
+			pCarteSelectionnee = (PCarte) pTasDeCartes_.getComponentAt(event.getDragOrigin().x
+					- pTasDeCartes_.getX(), event.getDragOrigin().y - pTasDeCartes_.getY());
 			cCarteSelectionnee = (CCarte) pCarteSelectionnee.getControleur();
 
 		} catch (Exception e) {
@@ -58,18 +59,18 @@ public class MyDragGestureListener implements DragGestureListener, DragSourceMot
 					cTasDeCartesTempInverse_.empiler(cCarte);
 
 				} while (!cCarte.equals(cCarteSelectionnee));
-				
-				while(!cTasDeCartesTempInverse_.isVide()){
+
+				while (!cTasDeCartesTempInverse_.isVide()) {
 					cTasDeCartesTemp_.empiler(cTasDeCartesTempInverse_.getSommet());
 					cTasDeCartesTempInverse_.depiler();
 				}
-				
-				
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			dragSource_.startDrag(event, DragSource.DefaultCopyDrop, (Transferable) pTasDeCartesTemp, myDragSourceListener);
+
+			dragSource_.startDrag(event, DragSource.DefaultCopyDrop,
+					(Transferable) pTasDeCartesTemp, myDragSourceListener);
 			pTasDeCartes_.remove((Component) pCarteSelectionnee);
 
 			valise_ = new Window((Window) (pTasDeCartes_.getRootPane().getParent()));
