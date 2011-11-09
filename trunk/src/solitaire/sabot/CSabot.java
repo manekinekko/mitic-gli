@@ -2,13 +2,14 @@ package solitaire.sabot;
 
 import java.awt.Dimension;
 import java.util.Observer;
-import Observer.MyObservable;
+
 import solitaire.application.Sabot;
 import solitaire.application.Usine;
 import solitaire.carte.PCarte;
 import solitaire.pac.Presentation;
 import solitaire.tasdecartes.ICTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
+import Observer.MyObservable;
 
 public class CSabot extends Sabot implements ICSabot {
 
@@ -27,10 +28,10 @@ public class CSabot extends Sabot implements ICSabot {
 
 		Presentation pTasVisible = visibles_.getPresentation();
 		Presentation pTasCache = cachees_.getPresentation();
-		
+
 		pTasVisible_ = ((PTasDeCartes) pTasVisible);
 		pTasCache_ = ((PTasDeCartes) pTasCache);
-		
+
 		pTasVisible_.setSize(new Dimension(PCarte.largeur * 2, PCarte.hauteur));
 		pSabot_ = new PSabot(this, cachees_, visibles_);
 		observable_ = new MyObservable(this);
@@ -58,16 +59,16 @@ public class CSabot extends Sabot implements ICSabot {
 				}
 			}
 		}
-		pTasVisible_.decompacterHorizontal();
 
 		if (cachees.getNombre() == 0) {
 			try {
 				super.retourner();
-				pTasCache_.compacter();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		pTasVisible_.decompacterHorizontal();
+
 	}
 
 	public void addObserver(Observer o) {
