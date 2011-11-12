@@ -1,6 +1,7 @@
 package solitaire.sabot;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -23,24 +24,16 @@ public class PSabot extends PDoubleTas implements IPSabot {
 
 		setPreferredSize(new Dimension(PCarte.largeur*3,PCarte.hauteur));
 
+		pCache.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pCache.addMouseListener(new MouseListener() {
-			
 			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-			
+			public void mouseReleased(MouseEvent e) {}
 			@Override
-			public void mousePressed(MouseEvent e) {
-			}
-			
+			public void mousePressed(MouseEvent e) {}
 			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-			
+			public void mouseExited(MouseEvent e) {}
 			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-			
+			public void mouseEntered(MouseEvent e) {}
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controleur.distribuer();
