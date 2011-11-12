@@ -8,7 +8,7 @@ import solitaire.application.Usine;
 import solitaire.carte.CCarte;
 import solitaire.carte.ICCarte;
 import solitaire.carte.PCarte;
-import Observer.MyObservable;
+import solitaire.observer.MyObservable;
 
 public class CTasDeCartes extends TasDeCartes implements ICTasDeCartes {
 

@@ -8,10 +8,8 @@ import java.awt.Point;
 import java.awt.dnd.DropTarget;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
-
 import solitaire.application.TasDeCartes;
 import solitaire.carte.CCarte;
 import solitaire.carte.PCarte;
@@ -20,8 +18,8 @@ import solitaire.doubletas.PDoubleTas;
 import solitaire.pac.Controleur;
 import solitaire.tasdecartes.ICTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
-import Observer.Feedback;
-import Observer.Feedbackable;
+import solitaire.observer.Feedback;
+import solitaire.observer.Feedbackable;
 
 public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 

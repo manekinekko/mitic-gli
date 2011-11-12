@@ -13,8 +13,7 @@ import solitaire.sabot.CSabot;
 import solitaire.sabot.ICSabot;
 import solitaire.tasdecartescolorees.CTasDeCartesColorees;
 import solitaire.tasdecartescolorees.ICTasDeCartesColorees;
-import solitaire.usinedecontroleurs.UsineDeControleurs;
-import Observer.MyObservable;
+import solitaire.observer.MyObservable;
 
 public class CSolitaire extends Solitaire implements ICSolitaire, Observer {
 
