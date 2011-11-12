@@ -1,5 +1,14 @@
 package solitaire.tasdecartesalternees;
 
+import java.awt.Cursor;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JPanel;
+
+import solitaire.application.Carte;
+import solitaire.carte.CCarte;
+import solitaire.carte.PCarte;
 import solitaire.tasdecartes.ICTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
 

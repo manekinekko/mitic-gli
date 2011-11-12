@@ -1,13 +1,17 @@
 package solitaire.tasdecartes;
 
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.io.Serializable;
+
 import javax.swing.JPanel;
+
+import solitaire.application.Carte;
 import solitaire.carte.CCarte;
 import solitaire.carte.ICCarte;
 import solitaire.carte.PCarte;
@@ -25,12 +29,13 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 				* 18));
 		controleur_ = controleur;
 		setOpaque(false);
+
 	}
 
 	@Override
 	public void add(ICCarte carte) {
 		JPanel pCarte = (JPanel) carte.getPresentation();
-		add(pCarte, null);
+		add(pCarte);
 		repaint();
 	}
 
