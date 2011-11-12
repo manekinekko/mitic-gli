@@ -70,6 +70,7 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 		Component carte;
 		for (int i = 0; i < componentNumber; i++) {
 			carte = getComponent(i);
+			carte.setLocation(0, 0);
 			setComponentZOrder(carte, 0);
 		}
 	}
