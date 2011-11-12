@@ -1,4 +1,4 @@
-package Observer;
+package solitaire.observer;
 
 import java.awt.Point;
 

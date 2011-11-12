@@ -3,23 +3,11 @@ package solitaire.tasdecartescolorees;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Paint;
-import java.awt.PaintContext;
 import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
 import java.awt.dnd.DropTarget;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.ColorModel;
-
-import javax.swing.BorderFactory;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
-
-import Observer.Feedback;
-import Observer.Feedbackable;
-
+import solitaire.observer.Feedback;
+import solitaire.observer.Feedbackable;
 import solitaire.carte.PCarte;
 import solitaire.dnd.MyDropTargetListener;
 import solitaire.tasdecartes.ICTasDeCartes;

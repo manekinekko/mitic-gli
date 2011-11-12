@@ -9,7 +9,7 @@ import solitaire.carte.PCarte;
 import solitaire.pac.Presentation;
 import solitaire.tasdecartes.ICTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
-import Observer.MyObservable;
+import solitaire.observer.MyObservable;
 
 public class CSabot extends Sabot implements ICSabot {
 

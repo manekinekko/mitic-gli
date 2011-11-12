@@ -3,6 +3,7 @@ package solitaire.colonne;
 import java.util.Observable;
 import java.util.Observer;
 
+import solitaire.observer.MyObservable;
 import solitaire.application.Colonne;
 import solitaire.application.Usine;
 import solitaire.carte.CCarte;
@@ -12,7 +13,6 @@ import solitaire.tasdecartes.CTasDeCartes;
 import solitaire.tasdecartes.ICTasDeCartes;
 import solitaire.tasdecartes.IPTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
-import Observer.MyObservable;
 
 public class CColonne extends Colonne implements ICColonne, Observer {
 
