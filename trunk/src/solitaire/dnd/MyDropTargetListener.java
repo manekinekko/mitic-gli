@@ -24,7 +24,7 @@ import solitaire.tasdecartes.PTasDeCartes;
 public class MyDropTargetListener implements DropTargetListener {
 
 	private ICTasDeCartes cTasDeCartes_;
-	private boolean accepterDrop_;
+	private boolean accepterDrop_; // pour optimiser le drop du DnD
 	private Feedback feedback_;
 
 	public MyDropTargetListener(ICTasDeCartes cTasDeCartes, Feedback feedback) {

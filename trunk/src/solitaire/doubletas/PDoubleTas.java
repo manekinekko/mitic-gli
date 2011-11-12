@@ -1,10 +1,14 @@
 package solitaire.doubletas;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+
+import solitaire.carte.CCarte;
 import solitaire.dnd.MyDragGestureListener;
 import solitaire.pac.Controleur;
 import solitaire.pac.Presentation;
