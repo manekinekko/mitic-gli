@@ -1,5 +1,6 @@
 package solitaire.dnd;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Window;
 import java.awt.datatransfer.Transferable;
@@ -25,6 +26,7 @@ public class MyDragGestureListener implements DragGestureListener, DragSourceMot
 	protected MyDragSourceListener myDragSourceListener = null;
 	private Window valise_;
 	private CTasDeCartes cTasDeCartesTemp_;
+	protected PCarte pCarteSelectionnee_;
 
 	public MyDragGestureListener(ICTasDeCartes cTasDeCartes, DragSource dragSource) {
 		dragSource_ = dragSource;

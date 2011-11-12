@@ -5,10 +5,13 @@ import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.io.Serializable;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
 /**
  * Composant Presentation d'une carte
@@ -21,21 +24,22 @@ public class PCarte extends JPanel implements IPCarte {
 	protected ImageIcon icone; // image de la face
 	protected static ImageIcon iconeDos; // image du dos
 	public static int largeur, hauteur;
+	private Border border;
 
 	/**
 	 * initialiser l'image du dos et les dimensions d'une PCarte
 	 */
 	static {
 		iconeDos = new ImageIcon(ClassLoader.getSystemResource("solitaire/cartesCSHD/dos.jpg"));
-		largeur = iconeDos.getIconWidth() + 4;
-		hauteur = iconeDos.getIconHeight() + 4;
+		largeur = iconeDos.getIconWidth()+4;
+		hauteur = iconeDos.getIconHeight()+4;
 	}
 	
 	/**
 	 * initialiser une carte
 	 * @param chaine : nom de la carte (exemple "3H" = 3 Heart)
 	 */
-	public PCarte(final String chaine, CCarte controle) {
+	public PCarte(final String chaine, final CCarte controle) {
 		this.controle = controle ;
 
 		// image de la face
@@ -53,11 +57,17 @@ public class PCarte extends JPanel implements IPCarte {
 
 		// le JPanel
 		setLayout(null);
-		setBackground(Color.yellow);
 		setOpaque(true);
 		setSize(face.getSize());
 		setPreferredSize(getSize());
 		setFaceVisible(false);
+		
+		border = BorderFactory.createLineBorder (Color.yellow, 10);
+		setBorder(border);
+		
+		setOpaque(false);
+		
+		
 	} // constructeur
 
 	/**

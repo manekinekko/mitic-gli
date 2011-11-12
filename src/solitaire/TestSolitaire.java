@@ -6,7 +6,7 @@ import solitaire.usinedecontroleurs.UsineDeControleurs;
 public class TestSolitaire {
 
 	public static void main(String[] args) {
-		new CSolitaire("Mon Super Solitaire", new UsineDeControleurs());
+		new CSolitaire("My Solitaire", new UsineDeControleurs());
 	}
 	
 }
