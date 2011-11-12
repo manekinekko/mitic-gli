@@ -25,6 +25,8 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements
 	public void empiler(Carte carte) {
 		super.empiler(carte);
 		pTasDeCartesColorees_.add((ICCarte) carte);
+		pTasDeCartesColorees_.compacter();
+		System.out.println("compacter");
 	}
 
 	@Override
