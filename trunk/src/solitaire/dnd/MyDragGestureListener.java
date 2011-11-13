@@ -114,7 +114,6 @@ public class MyDragGestureListener implements DragGestureListener, DragSourceMot
 
 				}
 
-				cTasDeCartes_.decompacter();
 				valise_.remove((PTasDeCartes) cTasDeCartesTemp_.getPresentation());
 			}
 

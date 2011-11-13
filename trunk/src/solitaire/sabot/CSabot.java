@@ -3,13 +3,14 @@ package solitaire.sabot;
 import java.awt.Dimension;
 import java.util.Observer;
 
+import solitaire.application.Carte;
 import solitaire.application.Sabot;
 import solitaire.application.Usine;
 import solitaire.carte.PCarte;
+import solitaire.observer.MyObservable;
 import solitaire.pac.Presentation;
 import solitaire.tasdecartes.ICTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
-import solitaire.observer.MyObservable;
 
 public class CSabot extends Sabot implements ICSabot {
 
