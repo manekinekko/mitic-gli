@@ -40,7 +40,6 @@ public class MyDragGestureListener implements DragGestureListener, DragSourceMot
 			pCarteSelectionnee = (PCarte) pTasDeCartes_.getComponentAt(event.getDragOrigin().x - pTasDeCartes_.getX(),
 					event.getDragOrigin().y - pTasDeCartes_.getY());
 			cCarteSelectionnee = (CCarte) pCarteSelectionnee.getControleur();
-			System.out.println(cCarteSelectionnee);
 		} catch (Exception e) {
 		}
 
@@ -56,13 +55,16 @@ public class MyDragGestureListener implements DragGestureListener, DragSourceMot
 					cCarte = (CCarte) (cTasDeCartes_.getSommet());
 					cTasDeCartes_.depiler();
 					cTasDeCartesTempInverse_.empiler(cCarte);
+					System.out.println("tas1"+cCarte);
 
 				} while (!cCarte.equals(cCarteSelectionnee));
 
 				while (!cTasDeCartesTempInverse_.isVide()) {
 					cTasDeCartesTemp_.empiler(cTasDeCartesTempInverse_.getSommet());
+					System.out.println("tas2"+cTasDeCartesTempInverse_.getSommet());
 					cTasDeCartesTempInverse_.depiler();
 				}
+				System.out.println();
 
 			} catch (Exception e) {
 				e.printStackTrace();

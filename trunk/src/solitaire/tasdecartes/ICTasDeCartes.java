@@ -1,7 +1,5 @@
 package solitaire.tasdecartes;
 
-import java.util.Observer;
-
 import solitaire.application.Carte;
 import solitaire.application.Tas;
 import solitaire.pac.Controleur;
@@ -41,5 +39,5 @@ public interface ICTasDeCartes extends Controleur {
 	public void decompacter();
 
 	public Carte getSommet() throws Exception;
-
+	
 }
