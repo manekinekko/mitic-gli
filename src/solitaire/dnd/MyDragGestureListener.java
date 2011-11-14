@@ -1,6 +1,5 @@
 package solitaire.dnd;
 
-import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DragGestureEvent;
@@ -17,8 +16,7 @@ import solitaire.tasdecartes.CTasDeCartes;
 import solitaire.tasdecartes.ICTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
 
-public class MyDragGestureListener implements DragGestureListener,
-		DragSourceMotionListener {
+public class MyDragGestureListener implements DragGestureListener, DragSourceMotionListener {
 	private ICTasDeCartes cTasDeCartes_;
 	private PTasDeCartes pTasDeCartes_;
 	protected DragSource dragSource_;
@@ -27,8 +25,7 @@ public class MyDragGestureListener implements DragGestureListener,
 	private CTasDeCartes cTasDeCartesTemp_;
 	protected PCarte pCarteSelectionnee_;
 
-	public MyDragGestureListener(ICTasDeCartes cTasDeCartes,
-			DragSource dragSource) {
+	public MyDragGestureListener(ICTasDeCartes cTasDeCartes, DragSource dragSource) {
 		dragSource_ = dragSource;
 		cTasDeCartes_ = cTasDeCartes;
 		pTasDeCartes_ = (PTasDeCartes) cTasDeCartes_.getPresentation();
@@ -40,11 +37,10 @@ public class MyDragGestureListener implements DragGestureListener,
 		PCarte pCarteSelectionnee = null;
 		CCarte cCarteSelectionnee = null;
 		try {
-			pCarteSelectionnee = (PCarte) pTasDeCartes_.getComponentAt(
-					event.getDragOrigin().x - pTasDeCartes_.getX(),
+			pCarteSelectionnee = (PCarte) pTasDeCartes_.getComponentAt(event.getDragOrigin().x - pTasDeCartes_.getX(),
 					event.getDragOrigin().y - pTasDeCartes_.getY());
 			cCarteSelectionnee = (CCarte) pCarteSelectionnee.getControleur();
-
+			System.out.println(cCarteSelectionnee);
 		} catch (Exception e) {
 		}
 
@@ -52,8 +48,7 @@ public class MyDragGestureListener implements DragGestureListener,
 
 			CTasDeCartes cTasDeCartesTempInverse_ = new CTasDeCartes("", null);
 			cTasDeCartesTemp_ = new CTasDeCartes("", null);
-			PTasDeCartes pTasDeCartesTemp = (PTasDeCartes) cTasDeCartesTemp_
-					.getPresentation();
+			PTasDeCartes pTasDeCartesTemp = (PTasDeCartes) cTasDeCartesTemp_.getPresentation();
 
 			CCarte cCarte;
 			try {
@@ -65,33 +60,21 @@ public class MyDragGestureListener implements DragGestureListener,
 				} while (!cCarte.equals(cCarteSelectionnee));
 
 				while (!cTasDeCartesTempInverse_.isVide()) {
-					cTasDeCartesTemp_.empiler(cTasDeCartesTempInverse_
-							.getSommet());
+					cTasDeCartesTemp_.empiler(cTasDeCartesTempInverse_.getSommet());
 					cTasDeCartesTempInverse_.depiler();
 				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			for (int i = 1; i <= cTasDeCartesTemp_.getNombre(); i++) {
-				try {
-					System.out.print("ctas:" + cTasDeCartesTemp_.getCarte(i) + " ; ");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-			System.out.println();
 
-			dragSource_.startDrag(event, DragSource.DefaultCopyDrop,
-					(Transferable) pTasDeCartesTemp, myDragSourceListener);
+			dragSource_.startDrag(event, DragSource.DefaultCopyDrop, (Transferable) pTasDeCartesTemp, myDragSourceListener);
 
 			pTasDeCartesTemp.decompacter();
 			// pTasDeCartes_.validate();
 			// pTasDeCartes_.repaint();
 
-			valise_ = new Window(
-					(Window) (pTasDeCartes_.getRootPane().getParent()));
+			valise_ = new Window((Window) (pTasDeCartes_.getRootPane().getParent()));
 			valise_.add((PTasDeCartes) pTasDeCartesTemp);
 			valise_.setSize(pTasDeCartesTemp.getSize());
 			valise_.repaint();
@@ -128,8 +111,7 @@ public class MyDragGestureListener implements DragGestureListener,
 
 				}
 
-				valise_.remove((PTasDeCartes) cTasDeCartesTemp_
-						.getPresentation());
+				valise_.remove((PTasDeCartes) cTasDeCartesTemp_.getPresentation());
 			}
 
 			valise_.setVisible(false);
