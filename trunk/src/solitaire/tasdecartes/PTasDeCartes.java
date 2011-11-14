@@ -43,14 +43,6 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 	@Override
 	public void decompacter() {
 
-		// Component comp[] = getComponents();
-		// for (int i = 0; i < comp.length; i++) {
-		// PCarte component = (PCarte)comp[i];
-		// CCarte carte = (CCarte) component.getControleur();
-		// System.out.print("ptas:"+carte+" ; ");
-		// }
-		// System.out.println();
-
 		// enleve toutes les cartes
 		Component comp[] = getComponents();
 		for (int i = 0; i < comp.length; i++) {
@@ -58,6 +50,7 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 			remove(component);
 		}
 
+		//parcours du controleur pour récupérer les cartes et les ajouter
 		try {
 
 			int nbCarte = controleur_.getNombre();
