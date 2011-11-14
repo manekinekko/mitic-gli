@@ -29,11 +29,9 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 
 	@Override
 	public void add(ICCarte carte) {
-		setSize(new Dimension(getSize().width, PCarte.hauteur
-				+ ecartDecompacte
-				* (controleur_.getNombre() - 1)));
+		setSize(new Dimension(getSize().width, PCarte.hauteur + ecartDecompacte * (controleur_.getNombre() - 1)));
 		JPanel pCarte = (JPanel) carte.getPresentation();
-		add(pCarte, controleur_.getNombre()-1);
+		add(pCarte, controleur_.getNombre() - 1);
 		repaint();
 	}
 
@@ -44,22 +42,38 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 
 	@Override
 	public void decompacter() {
-		
-//		Component comp[] = getComponents();
-//		for (int i = 0; i < comp.length; i++) {
-//			PCarte component = (PCarte)comp[i];
-//			CCarte carte = (CCarte) component.getControleur();
-//			System.out.print("ptas:"+carte+" ; ");
-//		}
-//		System.out.println();
-		
-		int componentNumber = getComponentCount();
-		Component carte;
-		for (int i = 0; i < componentNumber; i++) {
-			carte = getComponent(i);
-			carte.setLocation(0, i * ecartDecompacte);
-			setComponentZOrder(carte, 0);
+
+		// Component comp[] = getComponents();
+		// for (int i = 0; i < comp.length; i++) {
+		// PCarte component = (PCarte)comp[i];
+		// CCarte carte = (CCarte) component.getControleur();
+		// System.out.print("ptas:"+carte+" ; ");
+		// }
+		// System.out.println();
+
+		// enleve toutes les cartes
+		Component comp[] = getComponents();
+		for (int i = 0; i < comp.length; i++) {
+			PCarte component = (PCarte) comp[i];
+			remove(component);
 		}
+
+		try {
+
+			int nbCarte = controleur_.getNombre();
+			
+			for (int i = nbCarte; i > 0; i--) {
+				CCarte carte = (CCarte) controleur_.getCarte(i);
+				System.out.println(carte);
+				PCarte pCarte = (PCarte)carte.getPresentation();
+				add(pCarte);
+				pCarte.setLocation(0, (nbCarte-i) * ecartDecompacte);
+				setComponentZOrder(pCarte, 0);
+			}
+
+		} catch (Exception e) {}
+		
+		
 	}
 
 	@Override
@@ -75,49 +89,21 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 
 	@Override
 	public void decompacterHorizontal() {
-		
+
 		int componentNumber = getComponentCount();
 		Component carte;
 		int i;
-		for (i = 0; i < componentNumber-3; i++) {
+		for (i = 0; i < componentNumber - 3; i++) {
 			carte = getComponent(i);
 			carte.setLocation(0, 0);
 			setComponentZOrder(carte, 0);
 		}
 		for (int j = i; j < componentNumber; j++) {
 			carte = getComponent(j);
-			carte.setLocation((j-i) * ecartDecompacte,0);
+			carte.setLocation((j - i) * ecartDecompacte, 0);
 			setComponentZOrder(carte, 0);
 		}
-		
-	}
-	
-	@Override
-	public Object getTransferData(DataFlavor flavor)
-			throws UnsupportedFlavorException, IOException {
-		
-		Object result = null;
-		if ( flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType) ){
-			result = this;
-		}
-		
-		return result;
-	}
 
-	@Override
-	public DataFlavor[] getTransferDataFlavors() {
-		DataFlavor[] data = new DataFlavor[1];
-		try{
-			data[0] = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType);
-		}
-		catch(ClassNotFoundException e){
-		}
-		return data;
-	}
-
-	@Override
-	public boolean isDataFlavorSupported(DataFlavor flavor) {
-		return flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType);
 	}
 
 	@Override
@@ -127,7 +113,34 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 
 	@Override
 	public void remove(PCarte pCarte) {
-        super.remove(pCarte);
-        repaint();
+		super.remove(pCarte);
+		repaint();
 	}
+
+	@Override
+	public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+
+		Object result = null;
+		if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)) {
+			result = this;
+		}
+
+		return result;
+	}
+
+	@Override
+	public DataFlavor[] getTransferDataFlavors() {
+		DataFlavor[] data = new DataFlavor[1];
+		try {
+			data[0] = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType);
+		} catch (ClassNotFoundException e) {
+		}
+		return data;
+	}
+
+	@Override
+	public boolean isDataFlavorSupported(DataFlavor flavor) {
+		return flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType);
+	}
+
 }
