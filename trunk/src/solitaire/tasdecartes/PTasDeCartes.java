@@ -1,17 +1,13 @@
 package solitaire.tasdecartes;
 
 import java.awt.Component;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.io.Serializable;
-
 import javax.swing.JPanel;
-
-import solitaire.application.Carte;
 import solitaire.carte.CCarte;
 import solitaire.carte.ICCarte;
 import solitaire.carte.PCarte;
@@ -25,8 +21,7 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 
 	public PTasDeCartes(ICTasDeCartes controleur) {
 		super(null);
-		setSize(new Dimension(PCarte.largeur, PCarte.hauteur + ecartDecompacte
-				* 18));
+		setSize(new Dimension(PCarte.largeur, PCarte.hauteur));
 		controleur_ = controleur;
 		setOpaque(false);
 
@@ -34,8 +29,11 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 
 	@Override
 	public void add(ICCarte carte) {
+		setSize(new Dimension(getSize().width, PCarte.hauteur
+				+ ecartDecompacte
+				* (controleur_.getNombre() - 1)));
 		JPanel pCarte = (JPanel) carte.getPresentation();
-		add(pCarte);
+		add(pCarte, controleur_.getNombre()-1);
 		repaint();
 	}
 
@@ -47,13 +45,13 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 	@Override
 	public void decompacter() {
 		
-		Component comp[] = getComponents();
-		for (int i = 0; i < comp.length; i++) {
-			PCarte component = (PCarte)comp[i];
-			CCarte carte = (CCarte) component.getControleur();
-			System.out.print("ptas:"+carte+" ; ");
-		}
-		System.out.println();
+//		Component comp[] = getComponents();
+//		for (int i = 0; i < comp.length; i++) {
+//			PCarte component = (PCarte)comp[i];
+//			CCarte carte = (CCarte) component.getControleur();
+//			System.out.print("ptas:"+carte+" ; ");
+//		}
+//		System.out.println();
 		
 		int componentNumber = getComponentCount();
 		Component carte;
