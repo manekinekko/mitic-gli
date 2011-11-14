@@ -16,7 +16,7 @@ import javax.swing.border.Border;
 /**
  * Composant Presentation d'une carte
  */
-public class PCarte extends JPanel implements IPCarte {
+public class PCarte extends JPanel implements IPCarte, Transferable, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	protected CCarte controle ; // controleur associe
@@ -85,6 +85,34 @@ public class PCarte extends JPanel implements IPCarte {
 
 	public ImageIcon getIcone() {
 		return icone;
+	}
+	
+	@Override
+	public Object getTransferData(DataFlavor flavor)
+			throws UnsupportedFlavorException, IOException {
+		
+		Object result = null;
+		if ( flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType) ){
+			result = this;
+		}
+		
+		return result;
+	}
+
+	@Override
+	public DataFlavor[] getTransferDataFlavors() {
+		DataFlavor[] data = new DataFlavor[1];
+		try{
+			data[0] = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType);
+		}
+		catch(ClassNotFoundException e){
+		}
+		return data;
+	}
+
+	@Override
+	public boolean isDataFlavorSupported(DataFlavor flavor) {
+		return flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType);
 	}
 
 } // PCarte
