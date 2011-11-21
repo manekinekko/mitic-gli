@@ -40,6 +40,11 @@ public class MyDragGestureListener implements DragGestureListener, DragSourceMot
 			pCarteSelectionnee = (PCarte) pTasDeCartes_.getComponentAt(event.getDragOrigin().x - pTasDeCartes_.getX(),
 					event.getDragOrigin().y - pTasDeCartes_.getY());
 			cCarteSelectionnee = (CCarte) pCarteSelectionnee.getControleur();
+			
+			if(!cTasDeCartes_.isAlterne() && cCarteSelectionnee != cTasDeCartes_.getSommet()){
+				return;
+			}
+			
 		} catch (Exception e) {
 		}
 
