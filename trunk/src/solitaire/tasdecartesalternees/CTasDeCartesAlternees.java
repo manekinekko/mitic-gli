@@ -1,5 +1,7 @@
 package solitaire.tasdecartesalternees;
 
+import java.util.Observer;
+
 import solitaire.application.Carte;
 import solitaire.application.TasDeCartesAlternees;
 import solitaire.application.Usine;
@@ -43,6 +45,18 @@ public class CTasDeCartesAlternees extends TasDeCartesAlternees implements
 	@Override
 	public void decompacter() {
 		((PTasDeCartes) pTasDeCartesAlternees_).decompacter();
+	}
+
+	@Override
+	public void decompacterHorizontal() {
+	}
+
+	@Override
+	public void addObserver(Observer o) {
+	}
+
+	@Override
+	public void redessiner() {
 	}
 
 }

@@ -1,5 +1,7 @@
 package solitaire.tasdecartescolorees;
 
+import java.util.Observer;
+
 import solitaire.application.Carte;
 import solitaire.application.TasDeCartesColorees;
 import solitaire.application.Usine;
@@ -35,6 +37,18 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements
 
 	@Override
 	public void decompacter() {
+	}
+
+	@Override
+	public void decompacterHorizontal() {
+	}
+
+	@Override
+	public void addObserver(Observer o) {
+	}
+
+	@Override
+	public void redessiner() {
 	}
 
 }

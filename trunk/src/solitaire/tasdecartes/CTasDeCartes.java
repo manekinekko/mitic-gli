@@ -39,15 +39,19 @@ public class CTasDeCartes extends TasDeCartes implements ICTasDeCartes {
 		pTasDeCartes_.decompacter();
 	}
 
+	@Override
 	public void addObserver(Observer o) {
 		observable_.addObserver(o);
 	}
 
 	@Override
-	public void depiler(){
-		
+	public void redessiner(){
 		observable_.setChanged();
-		observable_.notifyObservers();
+		observable_.notifyObservers(this);
+	}
+	
+	@Override
+	public void depiler(){
 		
 		CCarte cCarte = null;
 		try {
@@ -57,5 +61,10 @@ public class CTasDeCartes extends TasDeCartes implements ICTasDeCartes {
 		} catch (Exception ex) {
 		}
 	}
-
+	
+	@Override
+	public void decompacterHorizontal() {
+		pTasDeCartes_.decompacterHorizontal();		
+	}
+	
 }

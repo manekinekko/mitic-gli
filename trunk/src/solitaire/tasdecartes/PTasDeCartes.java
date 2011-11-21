@@ -13,7 +13,8 @@ import solitaire.carte.ICCarte;
 import solitaire.carte.PCarte;
 import solitaire.pac.Controleur;
 
-public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable, Serializable {
+public class PTasDeCartes extends JPanel implements IPTasDeCartes,
+		Transferable, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	protected ICTasDeCartes controleur_;
@@ -29,9 +30,10 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 
 	@Override
 	public void add(ICCarte carte) {
-		setSize(new Dimension(getSize().width, PCarte.hauteur + ecartDecompacte * (controleur_.getNombre() - 1)));
+		setSize(new Dimension(getSize().width, PCarte.hauteur + ecartDecompacte
+				* (controleur_.getNombre() - 1)));
 		JPanel pCarte = (JPanel) carte.getPresentation();
-		add(pCarte, controleur_.getNombre() - 1);
+		add(pCarte);
 		repaint();
 	}
 
@@ -50,23 +52,22 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 			remove(component);
 		}
 
-		//parcours du controleur pour récupérer les cartes et les ajouter
+		// parcours du controleur pour recuperer les cartes et les ajouter
 		try {
 
 			int nbCarte = controleur_.getNombre();
-			
+
 			for (int i = nbCarte; i > 0; i--) {
 				CCarte carte = (CCarte) controleur_.getCarte(i);
-				System.out.println(carte);
-				PCarte pCarte = (PCarte)carte.getPresentation();
+				PCarte pCarte = (PCarte) carte.getPresentation();
 				add(pCarte);
-				pCarte.setLocation(0, (nbCarte-i) * ecartDecompacte);
+				pCarte.setLocation(0, (nbCarte - i) * ecartDecompacte);
 				setComponentZOrder(pCarte, 0);
 			}
 
-		} catch (Exception e) {}
-		
-		
+		} catch (Exception e) {
+		}
+
 	}
 
 	@Override
@@ -83,18 +84,33 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 	@Override
 	public void decompacterHorizontal() {
 
-		int componentNumber = getComponentCount();
-		Component carte;
-		int i;
-		for (i = 0; i < componentNumber - 3; i++) {
-			carte = getComponent(i);
-			carte.setLocation(0, 0);
-			setComponentZOrder(carte, 0);
-		}
-		for (int j = i; j < componentNumber; j++) {
-			carte = getComponent(j);
-			carte.setLocation((j - i) * ecartDecompacte, 0);
-			setComponentZOrder(carte, 0);
+		int nbCarte = controleur_.getNombre();
+
+		if (nbCarte > 0) {
+
+			// enleve toutes les cartes
+			Component comp[] = getComponents();
+			int nbCartesVisibles = comp.length > 3 ? 3 : comp.length;
+			
+			for (int i = 0; i < nbCartesVisibles; i++) {
+				PCarte component = (PCarte) comp[i];
+				remove(component);
+			}
+
+			try {
+				int j = nbCartesVisibles-1;
+
+				for (int i = 1; i <= nbCartesVisibles; i++) {
+					CCarte cCarte = (CCarte) controleur_.getCarte(i);
+					PCarte pCarte = (PCarte) cCarte.getPresentation();
+					System.out.println(cCarte+" "+i);
+					add(pCarte);
+					pCarte.setLocation(j * ecartDecompacte, 0);
+					j--;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -111,7 +127,8 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable,
 	}
 
 	@Override
-	public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+	public Object getTransferData(DataFlavor flavor)
+			throws UnsupportedFlavorException, IOException {
 
 		Object result = null;
 		if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)) {
