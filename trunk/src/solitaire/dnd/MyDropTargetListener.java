@@ -31,8 +31,7 @@ public class MyDropTargetListener implements DropTargetListener {
 		DataFlavor flavors[] = event.getCurrentDataFlavors();
 		int i;
 		for (i = 0; i < flavors.length; ++i) {
-			if (((PTasDeCartes) cTasDeCartes_.getPresentation())
-					.isDataFlavorSupported(flavors[i])) {
+			if (((PTasDeCartes) cTasDeCartes_.getPresentation()).isDataFlavorSupported(flavors[i])) {
 				break;
 			}
 		}
@@ -44,19 +43,25 @@ public class MyDropTargetListener implements DropTargetListener {
 			Transferable transferable = event.getTransferable();
 			PTasDeCartes pTasDeCartes;
 			try {
-				pTasDeCartes = (PTasDeCartes) transferable
-						.getTransferData(new DataFlavor(
-								DataFlavor.javaJVMLocalObjectMimeType));
+				pTasDeCartes = (PTasDeCartes) transferable.getTransferData(new DataFlavor(
+						DataFlavor.javaJVMLocalObjectMimeType));
 
-				CTasDeCartes cTasDeCartesRecu = (CTasDeCartes) pTasDeCartes
-						.getControleur();
+				CTasDeCartes cTasDeCartesRecu = (CTasDeCartes) pTasDeCartes.getControleur();
+
+//				for (int j = 1; j <= cTasDeCartes_.getNombre(); j++) {
+//					try {
+//						System.out.print("ctasdrop:" + cTasDeCartes_.getCarte(j) + " ; ");
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//				}
+//				System.out.println();
 
 				if (cTasDeCartes_.isEmpilable(cTasDeCartesRecu.getBase())) {
 					accepterDrop_ = true;
 					feedback_.highlightValideDrop(event.getLocation());
 					event.acceptDrag(DnDConstants.ACTION_COPY_OR_MOVE);
-				}
-				else {
+				} else {
 					feedback_.highlightInvalideDrop(event.getLocation());
 					accepterDrop_ = false;
 				}
@@ -102,10 +107,8 @@ public class MyDropTargetListener implements DropTargetListener {
 			if (transferable.isDataFlavorSupported(new DataFlavor(
 					DataFlavor.javaJVMLocalObjectMimeType))) {
 				PTasDeCartes pTasDeCartes = (PTasDeCartes) transferable
-						.getTransferData(new DataFlavor(
-								DataFlavor.javaJVMLocalObjectMimeType));
-				CTasDeCartes cTasDeCartesRecu = (CTasDeCartes) pTasDeCartes
-						.getControleur();
+						.getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
+				CTasDeCartes cTasDeCartesRecu = (CTasDeCartes) pTasDeCartes.getControleur();
 
 				if (cTasDeCartes_.isAlterne()) {
 					if (cTasDeCartes_.isEmpilable(cTasDeCartesRecu.getBase())) {
@@ -114,9 +117,8 @@ public class MyDropTargetListener implements DropTargetListener {
 						event.getDropTargetContext().dropComplete(true);
 					}
 				} else {
-					if (cTasDeCartes_.getNombre() == 1
-							&& cTasDeCartes_.isEmpilable(cTasDeCartesRecu
-									.getBase())) {
+					if (cTasDeCartesRecu.getNombre() == 1
+							&& cTasDeCartes_.isEmpilable(cTasDeCartesRecu.getBase())) {
 						cTasDeCartes_.empiler(cTasDeCartesRecu);
 						event.getDropTargetContext().dropComplete(true);
 						cTasDeCartes_.compacter();
