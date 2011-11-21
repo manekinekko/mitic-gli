@@ -55,16 +55,13 @@ public class MyDragGestureListener implements DragGestureListener, DragSourceMot
 					cCarte = (CCarte) (cTasDeCartes_.getSommet());
 					cTasDeCartes_.depiler();
 					cTasDeCartesTempInverse_.empiler(cCarte);
-					System.out.println("tas1"+cCarte);
 
 				} while (!cCarte.equals(cCarteSelectionnee));
 
 				while (!cTasDeCartesTempInverse_.isVide()) {
 					cTasDeCartesTemp_.empiler(cTasDeCartesTempInverse_.getSommet());
-					System.out.println("tas2"+cTasDeCartesTempInverse_.getSommet());
 					cTasDeCartesTempInverse_.depiler();
 				}
-				System.out.println();
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -73,8 +70,6 @@ public class MyDragGestureListener implements DragGestureListener, DragSourceMot
 			dragSource_.startDrag(event, DragSource.DefaultCopyDrop, (Transferable) pTasDeCartesTemp, myDragSourceListener);
 
 			pTasDeCartesTemp.decompacter();
-			// pTasDeCartes_.validate();
-			// pTasDeCartes_.repaint();
 
 			valise_ = new Window((Window) (pTasDeCartes_.getRootPane().getParent()));
 			valise_.add((PTasDeCartes) pTasDeCartesTemp);
@@ -112,7 +107,7 @@ public class MyDragGestureListener implements DragGestureListener, DragSourceMot
 					}
 
 				}
-
+				cTasDeCartes_.redessiner();
 				valise_.remove((PTasDeCartes) cTasDeCartesTemp_.getPresentation());
 			}
 

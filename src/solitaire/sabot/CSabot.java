@@ -1,18 +1,19 @@
 package solitaire.sabot;
 
 import java.awt.Dimension;
+import java.util.Observable;
 import java.util.Observer;
 
-import solitaire.application.Carte;
 import solitaire.application.Sabot;
 import solitaire.application.Usine;
 import solitaire.carte.PCarte;
 import solitaire.observer.MyObservable;
 import solitaire.pac.Presentation;
+import solitaire.tasdecartes.CTasDeCartes;
 import solitaire.tasdecartes.ICTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
 
-public class CSabot extends Sabot implements ICSabot {
+public class CSabot extends Sabot implements ICSabot, Observer {
 
 	private IPSabot pSabot_;
 	private PTasDeCartes pTasVisible_;
@@ -36,6 +37,7 @@ public class CSabot extends Sabot implements ICSabot {
 		pTasVisible_.setSize(new Dimension(PCarte.largeur * 2, PCarte.hauteur));
 		pSabot_ = new PSabot(this, cachees_, visibles_);
 		observable_ = new MyObservable(this);
+		visibles_.addObserver(this);
 	}
 
 	@Override
@@ -79,6 +81,15 @@ public class CSabot extends Sabot implements ICSabot {
 	public void empilerCarteSurTasColore() {
 		observable_.setChanged();
 		observable_.notifyObservers();
+	}
+
+	@Override
+	public void update(Observable o, Object obj) {
+		ICTasDeCartes cTasDeCartes = (ICTasDeCartes) obj;
+		if(cTasDeCartes != null){
+			cTasDeCartes.decompacterHorizontal();
+		}
+				
 	}
 
 }

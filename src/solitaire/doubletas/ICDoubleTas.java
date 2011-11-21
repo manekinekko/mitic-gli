@@ -1,7 +1,6 @@
 package solitaire.doubletas;
 
 import java.util.Observer;
-
 import solitaire.application.Carte;
 import solitaire.pac.Controleur;
 
