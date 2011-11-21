@@ -103,7 +103,6 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes,
 				for (int i = 1; i <= nbCartesVisibles; i++) {
 					CCarte cCarte = (CCarte) controleur_.getCarte(i);
 					PCarte pCarte = (PCarte) cCarte.getPresentation();
-					System.out.println(cCarte+" "+i);
 					add(pCarte);
 					pCarte.setLocation(j * ecartDecompacte, 0);
 					j--;

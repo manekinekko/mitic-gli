@@ -41,6 +41,7 @@ public class MyDragGestureListener implements DragGestureListener, DragSourceMot
 					event.getDragOrigin().y - pTasDeCartes_.getY());
 			cCarteSelectionnee = (CCarte) pCarteSelectionnee.getControleur();
 			
+			//on ne peut pas faire un drag au milieu d'un tas s'il n'est pas alterne
 			if(!cTasDeCartes_.isAlterne() && cCarteSelectionnee != cTasDeCartes_.getSommet()){
 				return;
 			}
