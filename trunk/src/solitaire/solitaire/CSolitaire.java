@@ -25,6 +25,7 @@ public class CSolitaire extends Solitaire implements ICSolitaire, Observer {
 	public CSolitaire(String nom, Usine usine) {
 		super(nom, usine);
 		initialiser();
+		run();
 	}
 	
 	@Override
