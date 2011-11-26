@@ -49,6 +49,14 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 
 		originalBackgroundColor_ = getBackground();
 
+		/**
+		 * TODO revoir cette partie
+		 */
+		int count = pVisible_.getComponentCount();
+		if ( count > 0 ) {
+			((PCarte)pVisible_.getComponent( count-1 )).highlightDraggable();
+		}
+		
 		addMouseListener(new MouseListener() {
 			private int lastZOrder_;
 			@Override
@@ -62,13 +70,13 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				if (visible.getNombre() > 0) {
-					try {
-						CCarte cCarte = (CCarte) visible.getSommet();
-						JPanel pCarte = ((JPanel) cCarte.getPresentation());
-						pCarte.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
+//					try {
+//						CCarte cCarte = (CCarte) visible.getSommet();
+//						JPanel pCarte = ((JPanel) cCarte.getPresentation());
+//						pCarte.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+//					} catch (Exception e1) {
+//						e1.printStackTrace();
+//					}
 				} 
 				else if (cachees.getNombre() > 0) {
 					try {
@@ -87,13 +95,13 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 			public void mouseEntered(MouseEvent e) {
 
 				if (visible.getNombre() > 0) {
-					try {
-						CCarte cCarte = (CCarte) visible.getSommet();
-						JPanel pCarte = ((JPanel) cCarte.getPresentation());
-						pCarte.setCursor(new Cursor(Cursor.MOVE_CURSOR));
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
+//					try {
+//						CCarte cCarte = (CCarte) visible.getSommet();
+//						JPanel pCarte = ((JPanel) cCarte.getPresentation());
+//						pCarte.setCursor(new Cursor(Cursor.MOVE_CURSOR));
+//					} catch (Exception e1) {
+//						e1.printStackTrace();
+//					}
 
 				} else {
 					if (cachees.getNombre() > 0) {
@@ -165,8 +173,13 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 	}
 
 	@Override
-	public void clearHighlight() {
+	public void clearFeedback() {
 		setBackground(originalBackgroundColor_);
+	}
+
+	@Override
+	public void highlightDraggable() {
+		System.out.println("Les colonnes ne sont pas concernees par le drag!");
 	}
 
 }

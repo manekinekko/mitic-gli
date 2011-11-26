@@ -69,7 +69,7 @@ public class MyDragGestureListener implements DragGestureListener, DragSourceMot
 					cTasDeCartesTemp_.empiler(cTasDeCartesTempInverse_.getSommet());
 					cTasDeCartesTempInverse_.depiler();
 				}
-
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -81,7 +81,10 @@ public class MyDragGestureListener implements DragGestureListener, DragSourceMot
 			valise_ = new Window((Window) (pTasDeCartes_.getRootPane().getParent()));
 			valise_.add((PTasDeCartes) pTasDeCartesTemp);
 			valise_.setSize(pTasDeCartesTemp.getSize());
-			valise_.setBackground(new Color(0, 255, 0, 50));
+			
+			// cela permet de corriger un bug (inconnu) d'affichage de la valise sur Windows
+			valise_.setBackground(new Color(0, 0, 0, 0));
+			
 			valise_.repaint();
 		}
 	}
