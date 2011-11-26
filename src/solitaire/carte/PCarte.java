@@ -2,6 +2,7 @@ package solitaire.carte;
 
 //import solitaire.controle.* ;
 import java.awt.*;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 
@@ -56,9 +57,8 @@ public class PCarte extends JPanel implements IPCarte{
 		
 		border = BorderFactory.createLineBorder (Color.yellow, 10);
 		setBorder(border);
-		
 		setOpaque(false);
-		
+
 		
 	} // constructeur
 
