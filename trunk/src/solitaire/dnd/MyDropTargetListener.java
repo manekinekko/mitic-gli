@@ -9,7 +9,11 @@ import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.io.IOException;
+
+import solitaire.carte.CCarte;
+import solitaire.carte.PCarte;
 import solitaire.observer.Feedback;
+import solitaire.observer.Feedbackable;
 import solitaire.tasdecartes.CTasDeCartes;
 import solitaire.tasdecartes.ICTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
@@ -71,7 +75,7 @@ public class MyDropTargetListener implements DropTargetListener {
 
 	@Override
 	public void dragExit(DropTargetEvent event) {
-		feedback_.clearHighlight();
+		feedback_.clearFeedback();
 		if (!accepterDrop_) {
 			return;
 		}
@@ -87,7 +91,7 @@ public class MyDropTargetListener implements DropTargetListener {
 	@Override
 	public void drop(DropTargetDropEvent event) {
 
-		feedback_.clearHighlight();
+		feedback_.clearFeedback();
 		if (!accepterDrop_) {
 			return;
 		}
@@ -100,7 +104,7 @@ public class MyDropTargetListener implements DropTargetListener {
 				PTasDeCartes pTasDeCartes = (PTasDeCartes) transferable
 						.getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
 				CTasDeCartes cTasDeCartesRecu = (CTasDeCartes) pTasDeCartes.getControleur();
-
+				
 				if (cTasDeCartes_.isAlterne()) {
 					if (cTasDeCartes_.isEmpilable(cTasDeCartesRecu.getBase())) {
 						cTasDeCartes_.empiler(cTasDeCartesRecu);
@@ -111,10 +115,14 @@ public class MyDropTargetListener implements DropTargetListener {
 					if (cTasDeCartesRecu.getNombre() == 1
 							&& cTasDeCartes_.isEmpilable(cTasDeCartesRecu.getBase())) {
 						cTasDeCartes_.empiler(cTasDeCartesRecu);
-						event.getDropTargetContext().dropComplete(true);
 						cTasDeCartes_.compacter();
+						event.getDropTargetContext().dropComplete(true);
 					}
 				}
+				
+				CCarte cCarte = (CCarte)cTasDeCartes_.getSommet();
+				PCarte pCarte = (PCarte)cCarte.getPresentation();
+				Feedback.highlightDraggableState((Feedbackable)pCarte);
 
 			}
 

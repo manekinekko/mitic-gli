@@ -48,10 +48,13 @@ public class PTasDeCartesColorees extends PTasDeCartes implements IPTasDeCartesC
 	}
 
 	@Override
-	public void clearHighlight() {
+	public void clearFeedback() {
 		setBorder(new LineBorder(originalBorderColor_, 2, true));
 	}
-	
-	
+
+	@Override
+	public void highlightDraggable() {
+		// TODO Auto-generated method stub
+	}
 	
 }

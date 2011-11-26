@@ -1,15 +1,24 @@
 package solitaire.carte;
 
 //import solitaire.controle.* ;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Point;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.Border;
+
+import solitaire.observer.Feedback;
+import solitaire.observer.Feedbackable;
 
 /**
  * Composant Presentation d'une carte
  */
-public class PCarte extends JPanel implements IPCarte{
+public class PCarte extends JPanel implements IPCarte, Feedbackable{
 
 	private static final long serialVersionUID = 1L;
 	protected CCarte controle ; // controleur associe
@@ -55,10 +64,9 @@ public class PCarte extends JPanel implements IPCarte{
 		setPreferredSize(getSize());
 		setFaceVisible(false);
 		
-		border = BorderFactory.createLineBorder (Color.yellow, 10);
+		border = BorderFactory.createLineBorder (Color.yellow, 5);
 		setBorder(border);
 		setOpaque(false);
-
 		
 	} // constructeur
 
@@ -77,6 +85,26 @@ public class PCarte extends JPanel implements IPCarte{
 
 	public ImageIcon getIcone() {
 		return icone;
+	}
+
+	@Override
+	public void highlightValideDrop(Point location) {
+		System.out.println("Les cartes ne sont pas concernees par le retour semantique du drop!");
+	}
+
+	@Override
+	public void highlightInvalideDrop(Point location) {
+		System.out.println("Les cartes ne sont pas concernees par le retour semantique du drop!");
+	}
+
+	@Override
+	public void clearFeedback() {
+		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+	}
+
+	@Override
+	public void highlightDraggable() {
+		setCursor(new Cursor(Cursor.MOVE_CURSOR));
 	}
 
 } // PCarte
