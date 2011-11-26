@@ -39,7 +39,7 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 		pVisible_ = (PTasDeCartesAlternees) visible.getPresentation();
 		pCache_.setLocation(0, 0);
 
-		Feedback feedback_ = new Feedback(this);
+		final Feedback feedback_ = new Feedback(this);
 		DropTarget dropTarget_ = new DropTarget(this, new MyDropTargetListener(
 				cTasVisible_, feedback_));
 
@@ -70,23 +70,20 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				if (visible.getNombre() > 0) {
-//					try {
-//						CCarte cCarte = (CCarte) visible.getSommet();
-//						JPanel pCarte = ((JPanel) cCarte.getPresentation());
-//						pCarte.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-//					} catch (Exception e1) {
-//						e1.printStackTrace();
-//					}
-				} 
-				else if (cachees.getNombre() > 0) {
-					try {
-						
-						CCarte cCarte = (CCarte) cachees.getSommet();
-						JPanel pCarte = ((JPanel) cCarte.getPresentation());
-						setComponentZOrder(pCarte, lastZOrder_);
-						
-					} catch (Exception e1) {
-						e1.printStackTrace();
+					
+					feedback_.clearFeedback();
+
+				} else {
+					if ( cachees.getNombre() > 0 ) {
+						try {
+							
+							CCarte cCarte = (CCarte) cachees.getSommet();
+							JPanel pCarte = ((JPanel) cCarte.getPresentation());
+							setComponentZOrder(pCarte, lastZOrder_);
+							
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
 					}
 				}
 			}
@@ -95,13 +92,8 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 			public void mouseEntered(MouseEvent e) {
 
 				if (visible.getNombre() > 0) {
-//					try {
-//						CCarte cCarte = (CCarte) visible.getSommet();
-//						JPanel pCarte = ((JPanel) cCarte.getPresentation());
-//						pCarte.setCursor(new Cursor(Cursor.MOVE_CURSOR));
-//					} catch (Exception e1) {
-//						e1.printStackTrace();
-//					}
+					
+					Feedback.highlightDraggableState((Feedbackable)pVisible_.getComponent(0));
 
 				} else {
 					if (cachees.getNombre() > 0) {
