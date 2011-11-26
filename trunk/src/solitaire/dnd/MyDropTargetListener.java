@@ -119,10 +119,6 @@ public class MyDropTargetListener implements DropTargetListener {
 						event.getDropTargetContext().dropComplete(true);
 					}
 				}
-				
-				CCarte cCarte = (CCarte)cTasDeCartes_.getSommet();
-				PCarte pCarte = (PCarte)cCarte.getPresentation();
-				Feedback.highlightDraggableState((Feedbackable)pCarte);
 
 			}
 

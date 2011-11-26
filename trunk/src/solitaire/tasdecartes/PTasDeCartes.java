@@ -5,12 +5,16 @@ import java.awt.Dimension;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.swing.JPanel;
 import solitaire.carte.CCarte;
 import solitaire.carte.ICCarte;
 import solitaire.carte.PCarte;
+import solitaire.observer.Feedback;
+import solitaire.observer.Feedbackable;
 import solitaire.pac.Controleur;
 
 public class PTasDeCartes extends JPanel implements IPTasDeCartes,
@@ -25,7 +29,6 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes,
 		setSize(new Dimension(PCarte.largeur, PCarte.hauteur));
 		controleur_ = controleur;
 		setOpaque(false);
-
 	}
 
 	@Override
@@ -110,6 +113,7 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes,
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
 		}
 
 	}
