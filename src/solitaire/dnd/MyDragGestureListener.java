@@ -1,5 +1,6 @@
 package solitaire.dnd;
 
+import java.awt.Color;
 import java.awt.Window;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DragGestureEvent;
@@ -80,6 +81,7 @@ public class MyDragGestureListener implements DragGestureListener, DragSourceMot
 			valise_ = new Window((Window) (pTasDeCartes_.getRootPane().getParent()));
 			valise_.add((PTasDeCartes) pTasDeCartesTemp);
 			valise_.setSize(pTasDeCartesTemp.getSize());
+			valise_.setBackground(new Color(0, 255, 0, 50));
 			valise_.repaint();
 		}
 	}

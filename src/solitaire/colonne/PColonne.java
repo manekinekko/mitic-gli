@@ -50,6 +50,7 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 		originalBackgroundColor_ = getBackground();
 
 		addMouseListener(new MouseListener() {
+			private int lastZOrder_;
 			@Override
 			public void mouseReleased(MouseEvent e) {
 			}
@@ -61,46 +62,52 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				if (visible.getNombre() > 0) {
-
 					try {
 						CCarte cCarte = (CCarte) visible.getSommet();
 						JPanel pCarte = ((JPanel) cCarte.getPresentation());
-						pCarte.setBackground(Color.yellow);
-						pCarte.setBorder(new LineBorder(Color.yellow, 5));
+						pCarte.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
 				} 
+				else if (cachees.getNombre() > 0) {
+					try {
+						
+						CCarte cCarte = (CCarte) cachees.getSommet();
+						JPanel pCarte = ((JPanel) cCarte.getPresentation());
+						setComponentZOrder(pCarte, lastZOrder_);
+						
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
 
 				if (visible.getNombre() > 0) {
-
 					try {
 						CCarte cCarte = (CCarte) visible.getSommet();
 						JPanel pCarte = ((JPanel) cCarte.getPresentation());
-						pCarte.setCursor(new Cursor(Cursor.HAND_CURSOR));
-						pCarte.setBackground(Color.cyan);
-						pCarte.setBorder(new LineBorder(Color.CYAN, 5));
+						pCarte.setCursor(new Cursor(Cursor.MOVE_CURSOR));
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
 
 				} else {
-
 					if (cachees.getNombre() > 0) {
-
 						try {
 							CCarte cCarte = (CCarte) cachees.getSommet();
 							JPanel pCarte = ((JPanel) cCarte.getPresentation());
-							setComponentZOrder(pCarte, 0);
 							pCarte.setCursor(new Cursor(Cursor.HAND_CURSOR));
+							
+							lastZOrder_ = getComponentZOrder(pCarte);
+							setComponentZOrder(pCarte, 0);
+							
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						}
-
 					}
 
 				}
@@ -145,7 +152,7 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 	public void highlightValideDrop(Point location) {
 		Component component = getComponentAt(location);
 		if (component != null) {
-			setBackground(new Color(0, 255, 0, 50));
+			setBackground(new Color(0, 255, 0, 255));
 		}
 	}
 
@@ -153,7 +160,7 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 	public void highlightInvalideDrop(Point location) {
 		Component component = getComponentAt(location);
 		if (component != null) {
-			setBackground(new Color(255, 0, 0, 50));
+			setBackground(new Color(255, 0, 0, 255));
 		}
 	}
 
