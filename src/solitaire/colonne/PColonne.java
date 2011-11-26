@@ -124,7 +124,7 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				if (visible.isVide()) {
+				if (visible.isVide() && (visible.getNombre() > 0 || cachees.getNombre() > 0)) {
 					try {
 						visible.empiler(cachees.getSommet());
 						cachees.depiler();
