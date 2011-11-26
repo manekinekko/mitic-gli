@@ -28,6 +28,24 @@ public class PSabot extends PDoubleTas implements IPSabot {
 		setPreferredSize(new Dimension(PCarte.largeur*3,PCarte.hauteur));
 
 		pCache.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
+		this.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if ( pVisible_.getComponentCount() > 0 ) {
+					Feedback.highlightDraggableState((Feedbackable)pVisible_.getComponent(0));
+				}
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {}
+		});	
+		
 		pCache.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseReleased(MouseEvent e) {}
@@ -40,11 +58,6 @@ public class PSabot extends PDoubleTas implements IPSabot {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				controleur.distribuer();
-				
-				// ajouter un retour semantique sur la carte au sommet du tas de cartes visible
-				if ( pVisible_.getComponentCount() > 0 ) {
-					Feedback.highlightDraggableState((Feedbackable)pVisible_.getComponent(0));
-				}
 			}
 		});
 		
