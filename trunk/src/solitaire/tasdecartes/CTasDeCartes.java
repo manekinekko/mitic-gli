@@ -7,6 +7,7 @@ import solitaire.application.TasDeCartes;
 import solitaire.application.Usine;
 import solitaire.carte.CCarte;
 import solitaire.carte.ICCarte;
+import solitaire.carte.IPCarte;
 import solitaire.carte.PCarte;
 import solitaire.observer.MyObservable;
 

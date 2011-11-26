@@ -48,15 +48,6 @@ public class MyDropTargetListener implements DropTargetListener {
 
 				CTasDeCartes cTasDeCartesRecu = (CTasDeCartes) pTasDeCartes.getControleur();
 
-//				for (int j = 1; j <= cTasDeCartes_.getNombre(); j++) {
-//					try {
-//						System.out.print("ctasdrop:" + cTasDeCartes_.getCarte(j) + " ; ");
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//				}
-//				System.out.println();
-
 				if (cTasDeCartes_.isEmpilable(cTasDeCartesRecu.getBase())) {
 					accepterDrop_ = true;
 					feedback_.highlightValideDrop(event.getLocation());
