@@ -18,6 +18,7 @@ import solitaire.doubletas.PDoubleTas;
 import solitaire.pac.Controleur;
 import solitaire.tasdecartes.ICTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
+import solitaire.tasdecartesalternees.PTasDeCartesAlternees;
 import solitaire.observer.Feedback;
 import solitaire.observer.Feedbackable;
 
@@ -26,7 +27,7 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 	private static final long serialVersionUID = 1L;
 	private ICColonne controleur_;
 	private PTasDeCartes pCache_;
-	private PTasDeCartes pVisible_;
+	private PTasDeCartesAlternees pVisible_;
 	private Color originalBackgroundColor_;
 
 	public PColonne(final ICColonne controleur, final ICTasDeCartes cachees,
@@ -35,7 +36,7 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 		controleur_ = controleur;
 
 		pCache_ = (PTasDeCartes) cachees.getPresentation();
-		pVisible_ = (PTasDeCartes) visible.getPresentation();
+		pVisible_ = (PTasDeCartesAlternees) visible.getPresentation();
 		pCache_.setLocation(0, 0);
 
 		Feedback feedback_ = new Feedback(this);
@@ -48,8 +49,6 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 
 		originalBackgroundColor_ = getBackground();
 
-		// ajoute la carte en bas du tas visible dans le tas colore
-		// correspondant, si bien sur c'est possible
 		addMouseListener(new MouseListener() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -96,6 +95,7 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 						try {
 							CCarte cCarte = (CCarte) cachees.getSommet();
 							JPanel pCarte = ((JPanel) cCarte.getPresentation());
+							setComponentZOrder(pCarte, 0);
 							pCarte.setCursor(new Cursor(Cursor.HAND_CURSOR));
 						} catch (Exception e1) {
 							e1.printStackTrace();
