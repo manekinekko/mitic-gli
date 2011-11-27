@@ -33,7 +33,6 @@ public class PSolitaire extends JFrame implements IPSolitaire {
 	public static final String APP_TXT_ABOUT = APP_TXT_TITLE + " \n" + "Projet GLI - Master 2 - MITIC - ISTIC \n"
 			+ "Par Chegham wassim & Gurval Le Bouter";
 	private static final String APP_TXT_MENU_FILE = "File";
-	private static final String APP_TXT_MENU_FILE_SUBMENU_1 = "Nouvelle Partie";
 	private static final String APP_TXT_MENU_FILE_SUBMENU_2 = "Quitter";
 	private static final String APP_TXT_MENU_HELP = "Aide";
 	private static final String APP_TXT_MENU_HELP_SUBMENU_1 = "A Propos";
@@ -60,15 +59,7 @@ public class PSolitaire extends JFrame implements IPSolitaire {
 		menu.setMnemonic(KeyEvent.VK_F);
 		menuBar.add(menu);
 
-		JMenuItem menuItem = new JMenuItem(APP_TXT_MENU_FILE_SUBMENU_1, KeyEvent.VK_N);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
-		menuItem.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		menu.add(menuItem);
-		menuItem = new JMenuItem(APP_TXT_MENU_FILE_SUBMENU_2, KeyEvent.VK_W);
+		JMenuItem menuItem = new JMenuItem(APP_TXT_MENU_FILE_SUBMENU_2, KeyEvent.VK_W);
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
 		menuItem.addActionListener(new ActionListener() {
 			@Override

@@ -1,7 +1,7 @@
 package solitaire.pac;
 
 /**
- * L'interface Presentation doit être implémentée par toutes les interface des
+ * L'interface Presentation doit être implémentée par toutes les interfaces des
  * présentations. Elle sert à forcer l'implémentation de la méthode getControleur.
  * 
  * @author Wassim Chegham {@link contact@cheghamwassim.com}

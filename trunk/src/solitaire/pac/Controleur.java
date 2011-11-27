@@ -1,7 +1,7 @@
 package solitaire.pac;
 
 /**
- * L'interface Controleur doit être implémentée par toutes les interface des
+ * L'interface Controleur doit être implémentée par toutes les interfaces des
  * contrôleurs. Elle sert à forcer l'implémentation de la méthode getPresentation.
  * 
  * @author Wassim Chegham {@link contact@cheghamwassim.com}
