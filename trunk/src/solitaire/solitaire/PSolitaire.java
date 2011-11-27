@@ -1,13 +1,9 @@
 package solitaire.solitaire;
 
 import java.awt.FlowLayout;
-import java.awt.GraphicsConfiguration;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,19 +14,23 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
-
 import solitaire.colonne.ICColonne;
 import solitaire.pac.Controleur;
 import solitaire.sabot.ICSabot;
 import solitaire.tasdecartescolorees.ICTasDeCartesColorees;
-import solitaire.usinedecontroleurs.UsineDeControleurs;
 
+/**
+ * Présentation du solitaire.
+ * 
+ * @author Wassim Chegham {@link contact@cheghamwassim.com}
+ * @author Gurval Le Bouter {@link sketylee@gmail.com}
+ * @see IPSolitaire
+ */
 public class PSolitaire extends JFrame implements IPSolitaire {
 
 	private static final long serialVersionUID = 1L;
 	private static final String APP_TXT_TITLE = "My Solitaire";
-	public static final String APP_TXT_ABOUT = APP_TXT_TITLE + " \n"
-			+ "Projet GLI - Master 2 - MITIC - ISTIC \n"
+	public static final String APP_TXT_ABOUT = APP_TXT_TITLE + " \n" + "Projet GLI - Master 2 - MITIC - ISTIC \n"
 			+ "Par Chegham wassim & Gurval Le Bouter";
 	private static final String APP_TXT_MENU_FILE = "File";
 	private static final String APP_TXT_MENU_FILE_SUBMENU_1 = "Nouvelle Partie";
@@ -40,6 +40,10 @@ public class PSolitaire extends JFrame implements IPSolitaire {
 
 	private CSolitaire controleur_;
 
+	/**
+	 * Constructeur du solitaire.
+	 * @param controleur
+	 */
 	public PSolitaire(CSolitaire controleur) {
 		super(APP_TXT_TITLE);
 		controleur_ = controleur;
@@ -56,28 +60,21 @@ public class PSolitaire extends JFrame implements IPSolitaire {
 		menu.setMnemonic(KeyEvent.VK_F);
 		menuBar.add(menu);
 
-		JMenuItem menuItem = new JMenuItem(APP_TXT_MENU_FILE_SUBMENU_1,
-				KeyEvent.VK_N);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1,
-				ActionEvent.ALT_MASK));
+		JMenuItem menuItem = new JMenuItem(APP_TXT_MENU_FILE_SUBMENU_1, KeyEvent.VK_N);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
 		menuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// getContentPane().removeAll();
-				// initPlateau_();
-				// finilizeJFrame_();
 			}
 		});
 		menu.add(menuItem);
 		menuItem = new JMenuItem(APP_TXT_MENU_FILE_SUBMENU_2, KeyEvent.VK_W);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2,
-				ActionEvent.ALT_MASK));
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
 		menuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				int ret = JOptionPane.showConfirmDialog(PSolitaire.this,
-						"Voulez-vous quitter l'application?");
+				int ret = JOptionPane.showConfirmDialog(PSolitaire.this, "Voulez-vous quitter l'application?");
 				if (ret == 0) {
 
 					dispose();
@@ -95,13 +92,11 @@ public class PSolitaire extends JFrame implements IPSolitaire {
 		menuBar.add(menu);
 
 		menuItem = new JMenuItem(APP_TXT_MENU_HELP_SUBMENU_1, KeyEvent.VK_A);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3,
-				ActionEvent.ALT_MASK));
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, ActionEvent.ALT_MASK));
 		menuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(PSolitaire.this,
-						PSolitaire.APP_TXT_ABOUT);
+				JOptionPane.showMessageDialog(PSolitaire.this, PSolitaire.APP_TXT_ABOUT);
 			}
 		});
 		menu.add(menuItem);
@@ -119,13 +114,16 @@ public class PSolitaire extends JFrame implements IPSolitaire {
 		validate();
 	}
 
+	/**
+	 * Initialise le plateau de jeu en ajoutant tous les éléments au jpanel 
+	 */
 	private void initPlateau_() {
 
 		ICSabot cSabot = controleur_.getCSabot();
-		ICTasDeCartesColorees[] cTasDeCartesColorees = controleur_
-				.getCTasDeCartesColorees();
+		ICTasDeCartesColorees[] cTasDeCartesColorees = controleur_.getCTasDeCartesColorees();
 		ICColonne[] cColonnes = controleur_.getCColonnes();
 
+		//creation des panel destinés a afficher les différentes présentations
 		Box row = Box.createVerticalBox();
 
 		JPanel line1 = new JPanel();
@@ -135,13 +133,16 @@ public class PSolitaire extends JFrame implements IPSolitaire {
 		line2.setLayout(new FlowLayout());
 		line3.setLayout(new FlowLayout());
 
+		//ajout du sabot
 		line1.add((JPanel) cSabot.getPresentation());
 		cSabot.compacter();
 
+		//ajout des tas de cartes colorees
 		for (ICTasDeCartesColorees tasDeCartesColorees : cTasDeCartesColorees) {
 			line1.add((JPanel) tasDeCartesColorees.getPresentation());
 		}
 
+		//ajout des colonnes
 		for (ICColonne colonne : cColonnes) {
 			line2.add((JPanel) colonne.getPresentation());
 			colonne.decompacter();
@@ -159,6 +160,7 @@ public class PSolitaire extends JFrame implements IPSolitaire {
 
 	}
 
+	@Override
 	public final Controleur getControleur() {
 		return controleur_;
 	}
