@@ -32,6 +32,7 @@ public class CSolitaire extends Solitaire implements ICSolitaire, Observer {
 
 	/**
 	 * Constructeur du solitaire.
+	 * 
 	 * @param nom
 	 * @param usine
 	 */
@@ -40,7 +41,7 @@ public class CSolitaire extends Solitaire implements ICSolitaire, Observer {
 		initialiser();
 		run();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -59,23 +60,24 @@ public class CSolitaire extends Solitaire implements ICSolitaire, Observer {
 		cSabot_ = (CSabot) super.sabot;
 		cSabot_.addObserver(this);
 
-        cTasDeCartesColorees_ = new CTasDeCartesColorees[4];
-        for(int i=0;i<4;i++){
-        	cTasDeCartesColorees_[i] = (ICTasDeCartesColorees) super.pilesColorees[i];
-        }
-        
+		cTasDeCartesColorees_ = new CTasDeCartesColorees[4];
+		for (int i = 0; i < 4; i++) {
+			cTasDeCartesColorees_[i] = (ICTasDeCartesColorees) super.pilesColorees[i];
+		}
+
 		cColonnes_ = new CColonne[7];
-        for(int i=0;i<7;i++){
-            cColonnes_[i] = (ICColonne) super.pilesAlternees[i];
-            cColonnes_[i].addObserver(this);
-        }
+		for (int i = 0; i < 7; i++) {
+			cColonnes_[i] = (ICColonne) super.pilesAlternees[i];
+			cColonnes_[i].addObserver(this);
+		}
 
 		pSolitaire_ = new PSolitaire(this);
-       
+
 	}
 
 	/**
 	 * Retourne le contrôleur du sabot.
+	 * 
 	 * @return cSabot le sabot.
 	 */
 	public ICSabot getCSabot() {
@@ -84,6 +86,7 @@ public class CSolitaire extends Solitaire implements ICSolitaire, Observer {
 
 	/**
 	 * Retourne un tableau contenant les contrôleurs des tas de cartes colorées.
+	 * 
 	 * @return cTasDeCartesColorees les tas de cartes colorées.
 	 */
 	public ICTasDeCartesColorees[] getCTasDeCartesColorees() {
@@ -92,6 +95,7 @@ public class CSolitaire extends Solitaire implements ICSolitaire, Observer {
 
 	/**
 	 * Retourne un tableau contenant les contrôleurs des colonnes.
+	 * 
 	 * @return cColonnes les colonnes.
 	 */
 	public ICColonne[] getCColonnes() {
@@ -103,14 +107,16 @@ public class CSolitaire extends Solitaire implements ICSolitaire, Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		ICDoubleTas cDoubleTas = (ICDoubleTas)((MyObservable)o).getDoubleTas();
+		//on recupere la carte à partire de l'objet observable.
+		ICDoubleTas cDoubleTas = (ICDoubleTas) ((MyObservable) o).getDoubleTas();
 		CCarte carte = null;
-		
+
 		try {
 			carte = (CCarte) cDoubleTas.getBase();
-			//cherche un tas de cartes colorées sur lequel on peut empiler la carte
+			// cherche un tas de cartes colorées sur lequel on peut empiler la
+			// carte
 			for (int i = 0; i < cTasDeCartesColorees_.length; i++) {
-				if(cTasDeCartesColorees_[i].isEmpilable(carte)){
+				if (cTasDeCartesColorees_[i].isEmpilable(carte)) {
 					cTasDeCartesColorees_[i].empiler(carte);
 					cDoubleTas.depiler();
 					break;
@@ -119,7 +125,7 @@ public class CSolitaire extends Solitaire implements ICSolitaire, Observer {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }
