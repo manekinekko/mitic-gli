@@ -9,26 +9,37 @@ import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.io.IOException;
-
-import solitaire.carte.CCarte;
-import solitaire.carte.PCarte;
 import solitaire.observer.Feedback;
-import solitaire.observer.Feedbackable;
 import solitaire.tasdecartes.CTasDeCartes;
 import solitaire.tasdecartes.ICTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
 
+/**
+ * Classe permettant d'effectuer le drop du drag 'n drop.
+ * 
+ * @author Wassim Chegham <contact@cheghamwassim.com>
+ * @author Gurval Le Bouter <gurval.lebouter@gmail.com>
+ * @see DropTargetListener
+ */
 public class MyDropTargetListener implements DropTargetListener {
 
 	private ICTasDeCartes cTasDeCartes_;
 	private boolean accepterDrop_; // pour optimiser le drop du DnD
 	private Feedback feedback_;
 
+	/**
+	 * Constructeur de MyDropTargetListener.
+	 * @param cTasDeCartes
+	 * @param feedback
+	 */
 	public MyDropTargetListener(ICTasDeCartes cTasDeCartes, Feedback feedback) {
 		cTasDeCartes_ = cTasDeCartes;
 		feedback_ = feedback;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void dragEnter(DropTargetDragEvent event) {
 
@@ -47,16 +58,20 @@ public class MyDropTargetListener implements DropTargetListener {
 			Transferable transferable = event.getTransferable();
 			PTasDeCartes pTasDeCartes;
 			try {
+				//récupère le tas de carte
 				pTasDeCartes = (PTasDeCartes) transferable.getTransferData(new DataFlavor(
 						DataFlavor.javaJVMLocalObjectMimeType));
 
 				CTasDeCartes cTasDeCartesRecu = (CTasDeCartes) pTasDeCartes.getControleur();
 
+				//test si le tas de carte est empilable
 				if (cTasDeCartes_.isEmpilable(cTasDeCartesRecu.getBase())) {
 					accepterDrop_ = true;
+					//affichage d'un retour sémentique "drop possible"
 					feedback_.highlightValideDrop(event.getLocation());
 					event.acceptDrag(DnDConstants.ACTION_COPY_OR_MOVE);
 				} else {
+					//affichage d'un retour sémentique "drop impossible"
 					feedback_.highlightInvalideDrop(event.getLocation());
 					accepterDrop_ = false;
 				}
@@ -73,21 +88,25 @@ public class MyDropTargetListener implements DropTargetListener {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void dragExit(DropTargetEvent event) {
+		//enlève le retour sémentique
 		feedback_.clearFeedback();
-		if (!accepterDrop_) {
-			return;
-		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void dragOver(DropTargetDragEvent event) {
-		if (!accepterDrop_) {
-			return;
-		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void drop(DropTargetDropEvent event) {
 
@@ -101,17 +120,21 @@ public class MyDropTargetListener implements DropTargetListener {
 
 			if (transferable.isDataFlavorSupported(new DataFlavor(
 					DataFlavor.javaJVMLocalObjectMimeType))) {
+				//recupère le tas de carte
 				PTasDeCartes pTasDeCartes = (PTasDeCartes) transferable
 						.getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
 				CTasDeCartes cTasDeCartesRecu = (CTasDeCartes) pTasDeCartes.getControleur();
 				
 				if (cTasDeCartes_.isAlterne()) {
 					if (cTasDeCartes_.isEmpilable(cTasDeCartesRecu.getBase())) {
+						//si le tas de carte est alterné et que l'on peut empiler le tas, on empile
 						cTasDeCartes_.empiler(cTasDeCartesRecu);
 						cTasDeCartes_.decompacter();
 						event.getDropTargetContext().dropComplete(true);
 					}
 				} else {
+					//si le tas n'est pas alterné, il s'agit d'un tas coloré
+					//on vérifi alors que l'on empile bien une seul carte
 					if (cTasDeCartesRecu.getNombre() == 1
 							&& cTasDeCartes_.isEmpilable(cTasDeCartesRecu.getBase())) {
 						cTasDeCartes_.empiler(cTasDeCartesRecu);
@@ -133,6 +156,9 @@ public class MyDropTargetListener implements DropTargetListener {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void dropActionChanged(DropTargetDragEvent event) {
 		event.acceptDrag(DnDConstants.ACTION_COPY_OR_MOVE);
