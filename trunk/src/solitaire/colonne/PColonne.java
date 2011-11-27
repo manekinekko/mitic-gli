@@ -8,6 +8,8 @@ import java.awt.Point;
 import java.awt.dnd.DropTarget;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+
 import javax.swing.JPanel;
 import solitaire.carte.CCarte;
 import solitaire.carte.PCarte;
@@ -38,7 +40,10 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 	private PTasDeCartes pCache_;
 	private PTasDeCartesAlternees pVisible_;
 	private Color originalBackgroundColor_;
-
+	private ICTasDeCartes visible_;
+	private ICTasDeCartes cachees_;
+	private int lastZOrder_;
+	
 	/**
 	 * Le constructeur permet d'initialiser les présentations des différents tas de cartes,
 	 * ainsi 
@@ -52,7 +57,9 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 			final ICTasDeCartes visible) {
 		super(controleur, cachees, visible);
 		controleur_ = controleur;
-
+		visible_ = visible;
+		cachees_ = cachees;
+		
 		pCache_ = (PTasDeCartes) cachees.getPresentation();
 		pVisible_ = (PTasDeCartesAlternees) visible.getPresentation();
 		pCache_.setLocation(0, 0);
@@ -72,103 +79,32 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 
 		// on définit les différents évenements auxquels doit réagir cette colonne
 		addMouseListener(new MouseListener() {
-			private int lastZOrder_;
 			@Override
 			public void mouseReleased(MouseEvent e) {
 			}
-
 			@Override
 			public void mousePressed(MouseEvent e) {
 			}
-
-			/**
-			 * Permet de retirer le comportement de retour sémantique sur les cartes visibles et cachées de la colonne courante.<br/>
-			 * Ce retour sémantique est définit lors d'un évènement <b>mouseEntered</b>.<br/>
-			 * Pour les cartes visibles, on délègue cette opération à la classe Feedback qui va pouvoir annuler le retour sémantique.<br/>
-			 * Concernant les cartes cachées, on repositionne la carte au sommet à son niveau Z-Order de départ après l'avoir corrigé lors de 
-			 * l'évènement <b>mouseEntered</b> de départ.
-			 */
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (visible.getNombre() > 0) {
-					
-					for(int i=0; i<pVisible_.getComponentCount(); i++) {
-						Feedback.clearDraggableState((Feedbackable)pVisible_.getComponent(i));
-					}
-
-				} else {
-					if ( cachees.getNombre() > 0  ) {
-						try {
-							
-							CCarte cCarte = (CCarte) cachees.getSommet();
-							JPanel pCarte = ((JPanel) cCarte.getPresentation());
-							setComponentZOrder(pCarte, lastZOrder_);
-							
-						} catch (Exception e1) {
-							//e1.printStackTrace();
-						}
-					}
-				}
+				PColonne.this.mouseExited_(e);
 			}
-
-			/**
-			 * Permet de définir un comportement de retour sémantique sur les cartes visibles et cachées de la colonne courante.<br/>
-			 * Pour les cartes visibles, on délègue la tâche à la classe Feedback qui va s'en occuper.<br/>
-			 * Pour les cartes cachées, on définit un nouveau curseur accompagné d'une légère correction du niveau Z-Order de la carte au sommet
-			 * du tas.
-			 */
 			@Override
 			public void mouseEntered(MouseEvent e) {
-
-				if (visible.getNombre() > 0) {
-					
-					for(int i=0; i<pVisible_.getComponentCount(); i++) {
-						Feedback.highlightDraggableState((Feedbackable)pVisible_.getComponent(i));
-					}
-
-				} else {
-					if (cachees.getNombre() > 0) {
-						try {
-							CCarte cCarte = (CCarte) cachees.getSommet();
-							JPanel pCarte = ((JPanel) cCarte.getPresentation());
-							pCarte.setCursor(new Cursor(Cursor.HAND_CURSOR));
-							
-							lastZOrder_ = getComponentZOrder(pCarte);
-							setComponentZOrder(pCarte, 0);
-							
-						} catch (Exception e1) {
-							e1.printStackTrace();
-						}
-					}
-
-				}
+				PColonne.this.mouseEntered_(e);
 			}
-
-			/**
-			 * Lors d'un simple click, lorsqu'il n'y a plus de cartes visibles, on retourne la carte cachée se trouvant au sommet du tas caché. 
-			 * Puis on empile cette carte sur le tas visible.<br/>
-			 * Lors d'un double-click sur une carte visible, on essaye d'empiler cette dernière sur l'un des tas colorés.
-			 */
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-				if (visible.isVide() && (visible.getNombre() > 0 || cachees.getNombre() > 0)) {
-					try {
-						visible.empiler(cachees.getSommet());
-						cachees.depiler();
-						repositionner();
-						pVisible_.decompacter();
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
-
-				} else {
-					// double click
-					if (e.getClickCount() == 2) {
-						controleur.empilerCarteSurTasColore();
-					}
-				}
-
+				PColonne.this.mouseClicked_(e);
+			}
+		});
+		addMouseMotionListener(new MouseMotionListener() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				PColonne.this.mouseEntered_(e);	
+			}
+			@Override
+			public void mouseDragged(MouseEvent e) {
 			}
 		});
 		
@@ -177,6 +113,98 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 		int count = pVisible_.getComponentCount();
 		if ( count > 0 ) {
 			((PCarte)pVisible_.getComponent( count-1 )).highlightDraggable();
+		}
+		
+	}
+
+	/**
+	 * Lors d'un simple click, lorsqu'il n'y a plus de cartes visibles, on retourne la carte cachée se trouvant au sommet du tas caché. 
+	 * Puis on empile cette carte sur le tas visible.<br/>
+	 * Lors d'un double-click sur une carte visible, on essaye d'empiler cette dernière sur l'un des tas colorés.
+	 * 
+	 * @param e Le MouseEvent déclenché par SWING
+	 */
+	protected void mouseClicked_(MouseEvent e) {
+		if (visible_.isVide() && (visible_.getNombre() > 0 || cachees_.getNombre() > 0)) {
+			try {
+				visible_.empiler(cachees_.getSommet());
+				cachees_.depiler();
+				repositionner();
+				pVisible_.decompacter();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+
+		} else {
+			// double click
+			if (e.getClickCount() == 2) {
+				controleur_.empilerCarteSurTasColore();
+			}
+		}
+	}
+
+	/**
+	 * Permet de définir un comportement de retour sémantique sur les cartes visibles et cachées de la colonne courante.<br/>
+	 * Pour les cartes visibles, on délègue la tâche à la classe Feedback qui va s'en occuper.<br/>
+	 * Pour les cartes cachées, on définit un nouveau curseur accompagné d'une légère correction du niveau Z-Order de la carte au sommet
+	 * du tas.
+	 * 
+	 * @param e Le MouseEvent déclenché par SWING
+	 */
+	protected void mouseEntered_(MouseEvent e) {
+		if (visible_.getNombre() > 0) {
+			
+			for(int i=0; i<pVisible_.getComponentCount(); i++) {
+				Feedback.highlightDraggableState((Feedbackable)pVisible_.getComponent(i));
+			}
+
+		} else {
+			if (cachees_.getNombre() > 0) {
+				try {
+					CCarte cCarte = (CCarte) cachees_.getSommet();
+					JPanel pCarte = ((JPanel) cCarte.getPresentation());
+					pCarte.setCursor(new Cursor(Cursor.HAND_CURSOR));
+					
+					lastZOrder_ = getComponentZOrder(pCarte);
+					setComponentZOrder(pCarte, 0);
+					
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+
+		}
+		
+	}
+
+	/**
+	 * Permet de retirer le comportement de retour sémantique sur les cartes visibles et cachées de la colonne courante.<br/>
+	 * Ce retour sémantique est définit lors d'un évènement <b>mouseEntered</b>.<br/>
+	 * Pour les cartes visibles, on délègue cette opération à la classe Feedback qui va pouvoir annuler le retour sémantique.<br/>
+	 * Concernant les cartes cachées, on repositionne la carte au sommet à son niveau Z-Order de départ après l'avoir corrigé lors de 
+	 * l'évènement <b>mouseEntered</b> de départ.
+	 * 
+	 * @param e Le MouseEvent déclenché par SWING
+	 */
+	protected void mouseExited_(MouseEvent e) {
+		if (visible_.getNombre() > 0) {
+			
+			for(int i=0; i<pVisible_.getComponentCount(); i++) {
+				Feedback.clearDraggableState((Feedbackable)pVisible_.getComponent(i));
+			}
+
+		} else {
+			if ( cachees_.getNombre() > 0  ) {
+				try {
+					
+					CCarte cCarte = (CCarte) cachees_.getSommet();
+					JPanel pCarte = ((JPanel) cCarte.getPresentation());
+					setComponentZOrder(pCarte, lastZOrder_);
+					
+				} catch (Exception e1) {
+					//e1.printStackTrace();
+				}
+			}
 		}
 		
 	}
