@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="package" author="true" classpath="lib/solitaire.application.jar" destdir="doc" doctitle="My Solitaire" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="solitaire.tasdecartes,solitaire.tasdecartesalternees,solitaire.usinedecontroleurs,solitaire.dnd,solitaire.tasdecartescolorees,solitaire.observer,solitaire.doubletas,solitaire,solitaire.solitaire,solitaire.carte,solitaire.colonne,solitaire.pac,solitaire.sabot" source="1.6" sourcepath="src" splitindex="true" use="true" version="true"/>
+    </target>
+</project>

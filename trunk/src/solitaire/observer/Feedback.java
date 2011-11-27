@@ -15,10 +15,9 @@ import javax.swing.JPanel;
  * 
  * @author Wassim Chegham {@link contact@cheghamwassim.com}
  * @author Gurval Le Bouter {@link sketylee@gmail.com}
- * @see Observable
  *
  */
-public class Feedback extends Observable implements Feedbackable {
+public class Feedback implements Feedbackable {
 
 	private JPanel jPanel_;
 
@@ -63,13 +62,19 @@ public class Feedback extends Observable implements Feedbackable {
 	}
 	
 	/**
-	 * Permet de mettre en évidence l'état <i>déplacable</i> d'un composant {@link Feedbackable}
-	 * @param component
+	 * Permet de mettre en évidence l'état <i>déplaçable</i> d'un composant {@link Feedbackable}
+	 * @param component Le composant auquel on souhaite mettre l'état <i>déplaçable</i> en évidence.
+	 * <b>A noter que ce composant doit impérativement avoir implémenté l'interface {@link Feedbackable}</b> 
 	 */
 	public static void highlightDraggableState(Feedbackable component) {
 		component.highlightDraggable();
 	}
-
+	
+	/**
+	 * Permet de retirer la mise en évidence de l'état <i>déplaçable</i> d'un composant {@link Feedbackable}
+	 * @param component Le composant duquel on souhaite retirer l'état <i>déplaçable</i> en évidence.
+	 * <b>A noter que ce composant doit impérativement avoir implémenté l'interface {@link Feedbackable}</b> 
+	 */
 	public static void clearDraggableState(Feedbackable component) {
 		component.clearFeedback();
 	}
