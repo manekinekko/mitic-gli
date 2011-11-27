@@ -97,7 +97,7 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 					}
 
 				} else {
-					if ( cachees.getNombre() > 0 && lastZOrder_ >= 0 ) {
+					if ( cachees.getNombre() > 0  ) {
 						try {
 							
 							CCarte cCarte = (CCarte) cachees.getSommet();
@@ -105,7 +105,7 @@ public class PColonne extends PDoubleTas implements IPColonne, Feedbackable {
 							setComponentZOrder(pCarte, lastZOrder_);
 							
 						} catch (Exception e1) {
-							e1.printStackTrace();
+							//e1.printStackTrace();
 						}
 					}
 				}
