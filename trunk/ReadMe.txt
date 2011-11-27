@@ -1,4 +1,4 @@
-/===============================================================================
+ï»¿/===============================================================================
 / Projet GLI: Solitaire
 /
 / Auteurs: 
@@ -9,10 +9,10 @@
 /===============================================================================
 
 - Comment la lancer :
-java -jar ./bin/Solitaire_Chegham_LeBouter_M2MITIC.jar
+java -jar Solitaire_Chegham_LeBouter_M2MITIC.jar
 
 - JavaDoc :
-La javadoc a été générée dans le répertoire ./documentation/javadoc/
+La javadoc a Ã©tÃ© gÃ©nÃ©rÃ©e dans le rÃ©pertoire ./documentation/javadoc/
 
 - Rapport :
 Merci de lire le PDF dans 
