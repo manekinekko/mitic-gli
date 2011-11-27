@@ -23,6 +23,7 @@ public class CSabot extends Sabot implements ICSabot, Observer {
 
 	private IPSabot pSabot_;
 	private PTasDeCartes pTasVisible_;
+	@SuppressWarnings("unused")
 	private PTasDeCartes pTasCache_;
 	private MyObservable observable_;
 	private ICTasDeCartes visibles_;

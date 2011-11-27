@@ -1,8 +1,6 @@
 package solitaire.dnd;
 
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Point;
 import java.awt.Window;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DragGestureEvent;
@@ -35,7 +33,6 @@ public class MyDragGestureListener implements DragGestureListener, DragSourceMot
 	private Window valise_;
 	private CTasDeCartes cTasDeCartesTemp_;
 	protected PCarte pCarteSelectionnee_;
-	private Point originPoint_;
 
 	/**
 	 * Constructeur de MyDragGestureListener
@@ -57,7 +54,6 @@ public class MyDragGestureListener implements DragGestureListener, DragSourceMot
 	public void dragGestureRecognized(DragGestureEvent event) {
 		PCarte pCarteSelectionnee = null;
 		CCarte cCarteSelectionnee = null;
-		originPoint_ = event.getDragOrigin();
 		try {
 			// recupération de la carte à partir des coordonnées de la souris
 			// sur le tas de cartes

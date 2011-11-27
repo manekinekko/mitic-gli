@@ -11,8 +11,8 @@ package solitaire.pac;
 public interface Controleur {
 	
 	/**
-	 * Retourne la présentation du contrôleur.
-	 * @return presentation la présentation.
+	 * Retourne la présentation associée au contrôleur courant.
+	 * @return presentation La présentation initialisée par le contrôleur courant.
 	 */
 	public Presentation getPresentation();
 	

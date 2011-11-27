@@ -6,10 +6,10 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.dnd.DropTarget;
 import javax.swing.border.LineBorder;
-import solitaire.observer.Feedback;
-import solitaire.observer.Feedbackable;
 import solitaire.carte.PCarte;
 import solitaire.dnd.MyDropTargetListener;
+import solitaire.feedback.Feedback;
+import solitaire.feedback.Feedbackable;
 import solitaire.tasdecartes.ICTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
 
@@ -34,8 +34,9 @@ public class PTasDeCartesColorees extends PTasDeCartes implements IPTasDeCartesC
 		setPreferredSize(new Dimension(PCarte.largeur+4, PCarte.hauteur+4));
 		setBackground(Color.blue);
 		
-		Feedback feedback_ = new Feedback(this);
-		DropTarget dropTarget_ = new DropTarget(this, new MyDropTargetListener(controleur, feedback_));
+		final Feedback feedback = new Feedback(this);
+		@SuppressWarnings("unused")
+		DropTarget dropTarget_ = new DropTarget(this, new MyDropTargetListener(controleur, feedback));
 
 		originalBorderColor_ = Color.gray;
 		setBorder(new LineBorder(originalBorderColor_, 2, true));
