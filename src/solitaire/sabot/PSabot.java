@@ -73,14 +73,6 @@ public class PSabot extends PDoubleTas implements IPSabot {
 			public void mouseExited(MouseEvent e) {}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if ( pVisible_.getComponentCount() > 0 ) {
-					
-					// ajouter un retour semantique sur la carte au sommet du tas de cartes visible
-					PCarte pCarte = (PCarte) pVisible_.getComponent(0);
-					Feedback.highlightDraggableState((Feedbackable)pCarte);
-
-				}
-				
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
