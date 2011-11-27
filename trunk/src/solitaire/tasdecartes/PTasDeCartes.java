@@ -5,25 +5,34 @@ import java.awt.Dimension;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.swing.JPanel;
 import solitaire.carte.CCarte;
 import solitaire.carte.ICCarte;
 import solitaire.carte.PCarte;
-import solitaire.observer.Feedback;
-import solitaire.observer.Feedbackable;
 import solitaire.pac.Controleur;
 
-public class PTasDeCartes extends JPanel implements IPTasDeCartes,
-		Transferable, Serializable {
+/**
+ * Présentation d'un tas de cartes.
+ * 
+ * @author Wassim Chegham {@link contact@cheghamwassim.com}
+ * @author Gurval Le Bouter {@link sketylee@gmail.com}
+ * @see IPTasDeCartes
+ * @see Transferable
+ * @see Serializable
+ */
+public class PTasDeCartes extends JPanel implements IPTasDeCartes, Transferable, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	protected ICTasDeCartes controleur_;
 	public static int ecartDecompacte = 20;
 
+	/**
+	 * Contructeur d'un tas de cartes.
+	 * 
+	 * @param controleur
+	 */
 	public PTasDeCartes(ICTasDeCartes controleur) {
 		super(null);
 		setSize(new Dimension(PCarte.largeur, PCarte.hauteur));
@@ -31,20 +40,28 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes,
 		setOpaque(false);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void add(ICCarte carte) {
-		setSize(new Dimension(getSize().width, PCarte.hauteur + ecartDecompacte
-				* (controleur_.getNombre() - 1)));
+		setSize(new Dimension(getSize().width, PCarte.hauteur + ecartDecompacte * (controleur_.getNombre() - 1)));
 		JPanel pCarte = (JPanel) carte.getPresentation();
 		add(pCarte);
 		repaint();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Controleur getControleur() {
 		return controleur_;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void decompacter() {
 
@@ -73,10 +90,14 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes,
 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void compacter() {
 		int componentNumber = getComponentCount();
 		Component carte;
+		// parcours toutes les cartes afin de les afficher dans l'ordre
 		for (int i = 0; i < componentNumber; i++) {
 			carte = getComponent(i);
 			carte.setLocation(0, 0);
@@ -84,6 +105,9 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes,
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void decompacterHorizontal() {
 
@@ -94,15 +118,15 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes,
 			// enleve toutes les cartes
 			Component comp[] = getComponents();
 			int nbCartesVisibles = comp.length > 3 ? 3 : comp.length;
-			
+
 			for (int i = 0; i < nbCartesVisibles; i++) {
 				PCarte component = (PCarte) comp[i];
 				remove(component);
 			}
 
 			try {
-				int j = nbCartesVisibles-1;
-
+				int j = nbCartesVisibles - 1;
+				// parcours toutes les cartes pour les ajouter
 				for (int i = 1; i <= nbCartesVisibles; i++) {
 					CCarte cCarte = (CCarte) controleur_.getCarte(i);
 					PCarte pCarte = (PCarte) cCarte.getPresentation();
@@ -113,25 +137,33 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes,
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		}
 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void redessiner() {
 		repaint();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void remove(PCarte pCarte) {
 		super.remove(pCarte);
 		repaint();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public Object getTransferData(DataFlavor flavor)
-			throws UnsupportedFlavorException, IOException {
+	public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
 
 		Object result = null;
 		if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)) {
@@ -141,6 +173,9 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes,
 		return result;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public DataFlavor[] getTransferDataFlavors() {
 		DataFlavor[] data = new DataFlavor[1];
@@ -151,6 +186,9 @@ public class PTasDeCartes extends JPanel implements IPTasDeCartes,
 		return data;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean isDataFlavorSupported(DataFlavor flavor) {
 		return flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType);

@@ -1,10 +1,14 @@
 package solitaire.tasdecartesalternees;
 
-import solitaire.carte.ICCarte;
 import solitaire.pac.Presentation;
 
+/**
+ * Interface décrivant les opérations de la couche présentation du tas de carte.
+ * 
+ * @author Wassim Chegham {@link contact@cheghamwassim.com}
+ * @author Gurval Le Bouter {@link sketylee@gmail.com}
+ * @see Presentation
+ */
 public interface IPTasDeCartesAlternees extends Presentation{
-	
-	public void add(ICCarte carte);
 	
 }
