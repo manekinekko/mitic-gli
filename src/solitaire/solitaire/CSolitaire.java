@@ -108,7 +108,7 @@ public class CSolitaire extends Solitaire implements ICSolitaire, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		//on recupere la carte à partire de l'objet observable.
-		ICDoubleTas cDoubleTas = (ICDoubleTas) ((MyObservable) o).getDoubleTas();
+		ICDoubleTas cDoubleTas = (ICDoubleTas) ((MyObservable) o).getObservable();
 		CCarte carte = null;
 
 		try {
