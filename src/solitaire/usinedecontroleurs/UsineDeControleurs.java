@@ -18,6 +18,7 @@ import solitaire.tasdecartescolorees.CTasDeCartesColorees;
  * 
  * @author Wassim Chegham {@link contact@cheghamwassim.com}
  * @author Gurval Le Bouter {@link sketylee@gmail.com}
+ * @see Usine
  * 
  */
 public class UsineDeControleurs extends Usine {

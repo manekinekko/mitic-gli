@@ -49,7 +49,11 @@ public class PSabot extends PDoubleTas implements IPSabot {
 			@Override
 			public void mousePressed(MouseEvent e) {}
 			@Override
-			public void mouseExited(MouseEvent e) {}
+			public void mouseExited(MouseEvent e) {
+				if ( pVisible_.getComponentCount() > 0 ) {
+					Feedback.clearDraggableState((Feedbackable)pVisible_.getComponent(0));
+				}
+			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if ( pVisible_.getComponentCount() > 0 ) {

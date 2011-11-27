@@ -1,18 +1,13 @@
 package solitaire.carte;
 
-//import solitaire.controle.* ;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Point;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-
-import solitaire.observer.Feedback;
 import solitaire.observer.Feedbackable;
 
 /**
@@ -83,6 +78,9 @@ public class PCarte extends JPanel implements IPCarte, Feedbackable{
 		return (controle) ;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public ImageIcon getIcone() {
 		return icone;
 	}
@@ -100,11 +98,18 @@ public class PCarte extends JPanel implements IPCarte, Feedbackable{
 	@Override
 	public void clearFeedback() {
 		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		border = BorderFactory.createLineBorder (Color.yellow, 5);
+		setBorder(border);
+		repaint();
 	}
 
 	@Override
 	public void highlightDraggable() {
 		setCursor(new Cursor(Cursor.MOVE_CURSOR));
+		border = BorderFactory.createLineBorder (Color.green, 5);
+		setBorder(border);
+		repaint();
+		
 	}
 
 } // PCarte

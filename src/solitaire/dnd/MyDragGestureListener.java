@@ -17,6 +17,12 @@ import solitaire.tasdecartes.CTasDeCartes;
 import solitaire.tasdecartes.ICTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
 
+/**
+ * 
+ * @author Wassim Chegham {@link contact@cheghamwassim.com}
+ * @author Gurval Le Bouter {@link sketylee@gmail.com}
+ *
+ */
 public class MyDragGestureListener implements DragGestureListener, DragSourceMotionListener {
 	private ICTasDeCartes cTasDeCartes_;
 	private PTasDeCartes pTasDeCartes_;
