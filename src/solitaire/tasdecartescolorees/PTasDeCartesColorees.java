@@ -13,11 +13,22 @@ import solitaire.dnd.MyDropTargetListener;
 import solitaire.tasdecartes.ICTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
 
+/**
+ * Presentation d'un tas de cartes colorées.
+ * 
+ * @author Wassim Chegham {@link contact@cheghamwassim.com}
+ * @author Gurval Le Bouter {@link sketylee@gmail.com}
+ * @see Feedbackable
+ */
 public class PTasDeCartesColorees extends PTasDeCartes implements IPTasDeCartesColorees, Feedbackable{
 
 	private static final long serialVersionUID = 1L;
 	private Color originalBorderColor_;
 
+	/**
+	 * Constructeur d'un tas de cartes colorees
+	 * @param controleur
+	 */
 	public PTasDeCartesColorees(ICTasDeCartesColorees controleur) {
 		super((ICTasDeCartes) controleur);
 		setPreferredSize(new Dimension(PCarte.largeur+4, PCarte.hauteur+4));
@@ -31,6 +42,9 @@ public class PTasDeCartesColorees extends PTasDeCartes implements IPTasDeCartesC
 		
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void highlightValideDrop(Point location) {
 		Component component = getComponentAt(location);
@@ -39,6 +53,9 @@ public class PTasDeCartesColorees extends PTasDeCartes implements IPTasDeCartesC
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void highlightInvalideDrop(Point location) {
 		Component component = getComponentAt(location);
@@ -47,14 +64,19 @@ public class PTasDeCartesColorees extends PTasDeCartes implements IPTasDeCartesC
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void clearFeedback() {
 		setBorder(new LineBorder(originalBorderColor_, 2, true));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void highlightDraggable() {
-		// TODO Auto-generated method stub
 	}
 	
 }
