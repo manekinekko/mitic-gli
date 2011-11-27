@@ -1,24 +1,34 @@
 package solitaire.sabot;
 
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JPanel;
-
-import solitaire.carte.CCarte;
 import solitaire.carte.PCarte;
 import solitaire.doubletas.PDoubleTas;
 import solitaire.observer.Feedback;
 import solitaire.observer.Feedbackable;
 import solitaire.tasdecartes.ICTasDeCartes;
 
+/**
+ * Présentation du sabot.
+ * 
+ * @author Wassim Chegham {@link contact@cheghamwassim.com}
+ * @author Gurval Le Bouter {@link sketylee@gmail.com}
+ * @see IPSabot
+ */
 public class PSabot extends PDoubleTas implements IPSabot {
 
 	private static final long serialVersionUID = 1L;
 	final private JPanel pVisible_;
 	
+	/**
+	 * Constructeur du sabot.
+	 * @param controleur
+	 * @param cTasCache
+	 * @param cTasVisible
+	 */
 	public PSabot(final ICSabot controleur, ICTasDeCartes cTasCache, ICTasDeCartes cTasVisible) {
 		super(controleur, cTasCache, cTasVisible);
 		

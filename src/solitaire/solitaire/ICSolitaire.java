@@ -1,5 +1,7 @@
 package solitaire.solitaire;
 
+import java.util.Observable;
+
 import solitaire.pac.Controleur;
 
 /**
@@ -11,5 +13,11 @@ import solitaire.pac.Controleur;
  * 
  */
 public interface ICSolitaire extends Controleur {
+
+	/**
+	 * On appelle cette methode avec en paramètre o, une carte destiné à être
+	 * ajoutée sur un tas de cartes colorées.
+	 */
+	public void update(Observable o, Object arg);
 
 }
