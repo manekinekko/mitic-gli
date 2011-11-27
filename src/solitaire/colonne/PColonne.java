@@ -13,12 +13,12 @@ import solitaire.carte.CCarte;
 import solitaire.carte.PCarte;
 import solitaire.dnd.MyDropTargetListener;
 import solitaire.doubletas.PDoubleTas;
+import solitaire.feedback.Feedback;
+import solitaire.feedback.Feedbackable;
 import solitaire.pac.Controleur;
 import solitaire.tasdecartes.ICTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
 import solitaire.tasdecartesalternees.PTasDeCartesAlternees;
-import solitaire.observer.Feedback;
-import solitaire.observer.Feedbackable;
 
 /**
  * 

@@ -1,8 +1,6 @@
-package solitaire.observer;
+package solitaire.feedback;
 
 import java.awt.Point;
-import java.util.Observable;
-import javax.swing.JPanel;
 
 /**
  * 
@@ -19,14 +17,14 @@ import javax.swing.JPanel;
  */
 public class Feedback implements Feedbackable {
 
-	private JPanel jPanel_;
+	private Feedbackable component_;
 
 	/**
 	 * Initiliser le mécanisque du retour sémantique
 	 * @param jPanel Le composant auquel on souhaite ajouter un retour sémantique
 	 */
-	public Feedback(JPanel jPanel) {
-		jPanel_ = jPanel;
+	public Feedback(Feedbackable component) {
+		component_ = component;
 	}
 	
 	/**
@@ -34,7 +32,7 @@ public class Feedback implements Feedbackable {
 	 */
 	@Override
 	public void highlightValideDrop(Point location) {
-		( (Feedbackable)jPanel_).highlightValideDrop(location);
+		component_.highlightValideDrop(location);
 	}
 	
 	/**
@@ -42,7 +40,7 @@ public class Feedback implements Feedbackable {
 	 */
 	@Override
 	public void highlightInvalideDrop(Point location) {
-		( (Feedbackable)jPanel_).highlightInvalideDrop(location);
+		component_.highlightInvalideDrop(location);
 	}
 	
 	/**
@@ -50,7 +48,7 @@ public class Feedback implements Feedbackable {
 	 */
 	@Override
 	public void clearFeedback() {
-		( (Feedbackable)jPanel_).clearFeedback();
+		component_.clearFeedback();
 	}
 
 	/**
@@ -58,7 +56,7 @@ public class Feedback implements Feedbackable {
 	 */
 	@Override
 	public void highlightDraggable() {
-		( (Feedbackable)jPanel_).highlightDraggable();
+		component_.highlightDraggable();
 	}
 	
 	/**

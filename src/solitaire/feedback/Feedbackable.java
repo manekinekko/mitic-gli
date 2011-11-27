@@ -1,8 +1,6 @@
-package solitaire.observer;
+package solitaire.feedback;
 
 import java.awt.Point;
-
-import solitaire.pac.Presentation;
 
 /**
  * 

@@ -2,7 +2,6 @@ package solitaire.colonne;
 
 import solitaire.doubletas.ICDoubleTas;
 import solitaire.pac.Controleur;
-import solitaire.pac.Presentation;
 
 /**
  * 

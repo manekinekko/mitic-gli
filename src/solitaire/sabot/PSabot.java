@@ -7,8 +7,8 @@ import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 import solitaire.carte.PCarte;
 import solitaire.doubletas.PDoubleTas;
-import solitaire.observer.Feedback;
-import solitaire.observer.Feedbackable;
+import solitaire.feedback.Feedback;
+import solitaire.feedback.Feedbackable;
 import solitaire.tasdecartes.ICTasDeCartes;
 
 /**

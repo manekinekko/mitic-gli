@@ -8,7 +8,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-import solitaire.observer.Feedbackable;
+
+import solitaire.feedback.Feedbackable;
 
 /**
  * Composant Presentation d'une carte

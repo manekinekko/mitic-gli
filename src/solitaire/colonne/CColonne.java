@@ -2,11 +2,9 @@ package solitaire.colonne;
 
 import java.util.Observer;
 import solitaire.observer.MyObservable;
-import solitaire.application.Carte;
 import solitaire.application.Colonne;
 import solitaire.application.Usine;
 import solitaire.carte.CCarte;
-import solitaire.carte.ICCarte;
 import solitaire.carte.PCarte;
 import solitaire.pac.Presentation;
 import solitaire.tasdecartes.ICTasDeCartes;

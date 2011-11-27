@@ -9,7 +9,7 @@ import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.io.IOException;
-import solitaire.observer.Feedback;
+import solitaire.feedback.Feedback;
 import solitaire.tasdecartes.CTasDeCartes;
 import solitaire.tasdecartes.ICTasDeCartes;
 import solitaire.tasdecartes.PTasDeCartes;
